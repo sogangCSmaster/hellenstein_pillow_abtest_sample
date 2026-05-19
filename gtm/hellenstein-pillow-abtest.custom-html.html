@@ -3,7 +3,7 @@
   "use strict";
 
   var PRODUCT_NO = "8461";
-  var TAG_VERSION = "2026-05-19.full-width-shell";
+  var TAG_VERSION = "2026-05-19.detail-color-overlay";
   var RAW_ASSET_BASE =
     "https://raw.githubusercontent.com/sogangCSmaster/hellenstein_pillow_abtest_sample/main/proposal/";
   var RAW_ORIGINAL_ASSET_BASE =
@@ -193,6 +193,24 @@
       "\n      html.hst-pillow-abtest-full-detail .hst-full-detail-shell .hst-block, html.hst-pillow-abtest-full-detail .hst-full-detail-shell #prdReview, html.hst-pillow-abtest-full-detail .hst-full-detail-shell #prdQnA { scroll-margin-top: 120px; }" +
       "\n      .hst-sticky-cta { opacity: 0 !important; pointer-events: none !important; transform: translateY(8px); transition: opacity .18s ease, transform .18s ease; }" +
       "\n      .hst-sticky-cta.is-visible { opacity: 1 !important; pointer-events: auto !important; transform: translateY(0); }" +
+      "\n      .hst-detail-highlight { --hst-detail-border: rgba(239, 68, 68, .9); --hst-detail-bg: rgba(255, 214, 102, .18); --hst-detail-badge-border: #ef4444; --hst-detail-badge-text: #b42318; outline-color: var(--hst-detail-border) !important; background: var(--hst-detail-bg) !important; }" +
+      "\n      .hst-detail-highlight::before { background: var(--hst-detail-bg) !important; }" +
+      "\n      .hst-detail-badge { border-color: var(--hst-detail-badge-border) !important; border-top-width: 7px !important; background: rgba(255, 255, 255, .95) !important; }" +
+      "\n      .hst-detail-badge strong { color: var(--hst-detail-badge-text) !important; }" +
+      "\n      .hst-detail-highlight[data-hst-block=\"hero\"] { --hst-detail-border: rgba(79, 70, 229, .9); --hst-detail-bg: rgba(99, 102, 241, .18); --hst-detail-badge-border: #4f46e5; --hst-detail-badge-text: #3730a3; }" +
+      "\n      .hst-detail-highlight[data-hst-block=\"problem\"] { --hst-detail-border: rgba(234, 88, 12, .9); --hst-detail-bg: rgba(251, 146, 60, .18); --hst-detail-badge-border: #ea580c; --hst-detail-badge-text: #9a3412; }" +
+      "\n      .hst-detail-highlight[data-hst-block=\"agitation\"] { --hst-detail-border: rgba(220, 38, 38, .9); --hst-detail-bg: rgba(248, 113, 113, .18); --hst-detail-badge-border: #dc2626; --hst-detail-badge-text: #991b1b; }" +
+      "\n      .hst-detail-highlight[data-hst-block=\"solution\"], .hst-detail-highlight[data-hst-block=\"solution-story\"] { --hst-detail-border: rgba(5, 150, 105, .9); --hst-detail-bg: rgba(52, 211, 153, .18); --hst-detail-badge-border: #059669; --hst-detail-badge-text: #065f46; }" +
+      "\n      .hst-detail-highlight[data-hst-block=\"social-proof\"] { --hst-detail-border: rgba(37, 99, 235, .9); --hst-detail-bg: rgba(96, 165, 250, .17); --hst-detail-badge-border: #2563eb; --hst-detail-badge-text: #1d4ed8; }" +
+      "\n      .hst-detail-highlight[data-hst-block=\"height\"], .hst-detail-highlight[data-hst-block=\"height-neck\"], .hst-detail-highlight[data-hst-block=\"height-steps\"], .hst-detail-highlight[data-hst-block=\"height-guide\"] { --hst-detail-border: rgba(8, 145, 178, .9); --hst-detail-bg: rgba(34, 211, 238, .18); --hst-detail-badge-border: #0891b2; --hst-detail-badge-text: #155e75; }" +
+      "\n      .hst-detail-highlight[data-hst-block=\"structure\"], .hst-detail-highlight[data-hst-block=\"structure-zone\"], .hst-detail-highlight[data-hst-block=\"structure-adjust\"], .hst-detail-highlight[data-hst-block=\"structure-shape\"] { --hst-detail-border: rgba(124, 58, 237, .9); --hst-detail-bg: rgba(167, 139, 250, .18); --hst-detail-badge-border: #7c3aed; --hst-detail-badge-text: #5b21b6; }" +
+      "\n      .hst-detail-highlight[data-hst-block=\"comparison\"] { --hst-detail-border: rgba(202, 138, 4, .92); --hst-detail-bg: rgba(250, 204, 21, .2); --hst-detail-badge-border: #ca8a04; --hst-detail-badge-text: #854d0e; }" +
+      "\n      .hst-detail-highlight[data-hst-block=\"persona\"] { --hst-detail-border: rgba(219, 39, 119, .9); --hst-detail-bg: rgba(244, 114, 182, .17); --hst-detail-badge-border: #db2777; --hst-detail-badge-text: #9d174d; }" +
+      "\n      .hst-detail-highlight[data-hst-block=\"risk-reversal\"] { --hst-detail-border: rgba(217, 119, 6, .9); --hst-detail-bg: rgba(251, 191, 36, .18); --hst-detail-badge-border: #d97706; --hst-detail-badge-text: #92400e; }" +
+      "\n      .hst-detail-highlight[data-hst-block=\"authority\"], .hst-detail-highlight[data-hst-block=\"authority-fiti\"], .hst-detail-highlight[data-hst-block=\"authority-safety\"], .hst-detail-highlight[data-hst-block=\"authority-durable\"] { --hst-detail-border: rgba(22, 163, 74, .9); --hst-detail-bg: rgba(74, 222, 128, .17); --hst-detail-badge-border: #16a34a; --hst-detail-badge-text: #166534; }" +
+      "\n      .hst-detail-highlight[data-hst-block=\"guide\"], .hst-detail-highlight[data-hst-block=\"guide-use\"], .hst-detail-highlight[data-hst-block=\"guide-posture\"], .hst-detail-highlight[data-hst-block=\"guide-care\"], .hst-detail-highlight[data-hst-block=\"guide-spec\"], .hst-detail-highlight[data-hst-block=\"guide-washing\"] { --hst-detail-border: rgba(71, 85, 105, .9); --hst-detail-bg: rgba(148, 163, 184, .18); --hst-detail-badge-border: #475569; --hst-detail-badge-text: #334155; }" +
+      "\n      .hst-detail-highlight[data-hst-block=\"purchase-criteria\"] { --hst-detail-border: rgba(13, 148, 136, .9); --hst-detail-bg: rgba(45, 212, 191, .17); --hst-detail-badge-border: #0d9488; --hst-detail-badge-text: #115e59; }" +
+      "\n      .hst-detail-highlight[data-hst-block=\"final\"] { --hst-detail-border: rgba(147, 51, 234, .9); --hst-detail-bg: rgba(216, 180, 254, .18); --hst-detail-badge-border: #9333ea; --hst-detail-badge-text: #6b21a8; }" +
       "\n      .hst-review-carousel { margin-top: 34px; display: flex; gap: 14px; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; padding: 0 4px 12px 0; -webkit-overflow-scrolling: touch; }" +
       "\n      .hst-review-carousel .hst-review-card { flex: 0 0 320px; scroll-snap-align: start; }" +
       "\n      .hst-review-card .hst-review-label { display: inline-flex; align-items: center; min-height: 28px; padding: 0 10px; border-radius: 999px; background: #f7f2ea; color: #3d4d43; font-size: 12px; font-weight: 850; }" +
