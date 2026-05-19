@@ -95,11 +95,13 @@
   }
 
   function escapeHtml(value) {
+    var amp = String.fromCharCode(38);
+    var quote = String.fromCharCode(34);
     var text = String(value || "");
-    text = text.split("&").join("&amp;");
-    text = text.split(String.fromCharCode(60)).join("&lt;");
-    text = text.split(String.fromCharCode(62)).join("&gt;");
-    text = text.split('"').join("&quot;");
+    text = text.split(amp).join(amp + "amp;");
+    text = text.split(String.fromCharCode(60)).join(amp + "lt;");
+    text = text.split(String.fromCharCode(62)).join(amp + "gt;");
+    text = text.split(quote).join(amp + "quot;");
     return text;
   }
 
