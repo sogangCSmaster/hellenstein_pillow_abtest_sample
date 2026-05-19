@@ -65,7 +65,7 @@ NODE_PATH=/Users/yuseungjae/.cache/codex-runtimes/codex-primary-runtime/dependen
 
 - 상품 정보 영역 상단 신뢰 모듈
 - Solution 이후 실제 리뷰 요약 모듈
-- 비교표, 적응 기간 안내, FAQ
+- 비교표, 적응 기간 안내, 구매 전 확인 기준
 - 하단 Sticky CTA
 - `detail=true`일 때 PPTX 기반 설명 패널
 

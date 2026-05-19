@@ -27,18 +27,18 @@ Core frameworks:
 
 | Order | PPTX block | PDP purpose | Implementation |
 | --- | --- | --- | --- |
-| 01 | Hero | State product value in the first viewport: neck fit, 4-step height, review proof. | HTML hero + generated lifestyle image cut with controlled shopper-facing copy |
+| 01 | Hero | State product value in the first viewport: neck fit and 4-step height without overstating review volume. | HTML hero + generated lifestyle image cut with controlled shopper-facing copy |
 | 02 | Problem | Make the shopper recognize the pillow-fit problem. | HTML copy + generated lifestyle image cut with controlled shopper-facing copy |
 | 03 | Agitation | Show repeated mornings as the cost of a bad fit. | HTML copy + generated visual cut with controlled shopper-facing copy |
 | 04 | Solution | Explain why Hellenstein rebuilt the pillow. | HTML section + reused R&D/intro original image |
-| 05 | Social Proof Top | Move actual reviews above the long detail stack after the problem/solution framing. | HTML module from existing `#prdReview` DOM |
+| 05 | Social Proof Top | Move actual review content above the long detail stack after the problem/solution framing. | HTML carousel from existing `#prdReview` DOM, not summary-count proof |
 | 06 | FAB Height | Convert height adjustment into customer benefit. | HTML FAB cards + reused height originals |
 | 07 | FAB Structure | Explain the 4-part support structure. | HTML FAB cards + reused structure originals |
 | 08 | Comparison | Keep comparison inside the page. | HTML comparison table, not image text |
 | 09 | Who Is This For | Create self-identification and gift context. | HTML persona grid + generated persona image cut with controlled shopper-facing copy |
 | 10 | Risk Reversal | Reduce adaptation anxiety without claiming live policy as final. | HTML callout; `100일 보장` appears only as proposed policy language in `detail=true` explanation |
 | 11 | Authority Stack | Group FITI, safety, durability, and testing proof. | HTML proof grid + reused certification originals |
-| 12 | FAQ | Answer final objections. | HTML FAQ, not image text |
+| 12 | Purchase Criteria | Reframe final objections into shopper decision criteria. | HTML deep-dive checklist, not generic Q&A |
 | 13 | Final CTA + UGC | End with product memory and action. | HTML CTA + generated final lifestyle image cut with controlled shopper-facing copy |
 
 ## Asset Decisions
@@ -50,7 +50,7 @@ Reuse these originals:
 - `original/15_4_point3_1.webp`, `original/16_4_point3_2.webp`, `original/19_4_point4_1.webp`: 4-part/shape logic.
 - `original/21_4_point5_2.webp`, `original/23_4_point6_1.webp`, `original/24_4_point6_2.webp`: FITI, safety, durability.
 - `original/29_7_guide.webp`, `original/30_7_guide_1.webp`: use guide.
-- `original/31_8_q_a.webp`, `original/32_9_careguide.webp`, `original/34_11_spec.webp`, `original/35_12_washing.webp`: supporting bottom information.
+- `original/32_9_careguide.webp`, `original/34_11_spec.webp`, `original/35_12_washing.webp`: supporting bottom information.
 
 Generate or compose these new visual cuts:
 
@@ -76,7 +76,7 @@ From `cro`, `copywriting`, `marketing-psychology`, `ab-testing`, and `grain`:
 - Make the next action obvious, but keep clickable actions in HTML.
 - Reduce decisions before reducing clicks: one primary sticky action, supporting review jump.
 - Keep one idea per section.
-- Use actual review language where available; do not invent fake testimonials.
+- Use actual review language where available; do not invent fake testimonials or overuse review-count proof.
 - Put proof near claims: review proof near hero, certification proof near authority, comparison near price justification.
 - Separate experiment presentation from customer-facing PDP: `detail=true` shows rationale overlays; `detail=false` should feel like a shopper page.
 - Track rendered state and CTA clicks through `dataLayer`.
