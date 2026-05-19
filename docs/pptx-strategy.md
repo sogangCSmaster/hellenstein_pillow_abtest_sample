@@ -74,12 +74,39 @@ Image generation and composition constraints:
 From `cro`, `copywriting`, `marketing-psychology`, `ab-testing`, and `grain`:
 
 - Make the next action obvious, but keep clickable actions in HTML.
-- Reduce decisions before reducing clicks: one primary sticky action, supporting review jump.
+- Reduce decisions before reducing clicks: use a conditional desktop sticky action, but keep the native Cafe24 mobile buy bar as the only mobile fixed CTA.
 - Keep one idea per section.
 - Use actual review language where available; do not invent fake testimonials or overuse review-count proof.
 - Put proof near claims: review proof near hero, certification proof near authority, comparison near price justification.
 - Separate experiment presentation from customer-facing PDP: `detail=true` shows rationale overlays; `detail=false` should feel like a shopper page.
 - Track rendered state and CTA clicks through `dataLayer`.
+
+## GTM Layout Principle
+
+The GTM implementation does not only replace the long image stack inside
+`#prdDetail .prdimages`. For the proposal view, it moves the existing
+`.detail-left .xans-product-additional` block and the adjacent `#stickyNav`
+into a new full-width `.hst-full-detail-shell` after `.detailArea`.
+
+This preserves the original Cafe24 product gallery, purchase form, options,
+quantity controls, cart button, and buy button, while letting the proposed PDP
+body render as a centered 1000px detail page instead of being trapped in the
+730px left column.
+
+The non-purchase `#detailguide` notice block is moved after the proposal shell
+when it is nested inside `.detail-right`, because otherwise the proposed PDP can
+be pushed below shipping and exchange notices in the local Cafe24 markup.
+
+If the full-width shell cannot be created, the tag falls back to the older image
+replacement path and pushes `hellenstein_pillow_abtest_layout_fallback` to
+`dataLayer` so the failure is visible during GTM QA.
+
+Mobile constraint:
+
+- Do not render a custom sticky CTA on mobile.
+- Keep the native Cafe24 bottom buy bar as the only fixed purchase action.
+- Keep review jumps available from the top proof module and in-page review block,
+  but avoid stacking another fixed bar above `Add to Cart / Buy Now`.
 
 ## Detail Mode
 

@@ -3,7 +3,7 @@
   "use strict";
 
   var PRODUCT_NO = "8461";
-  var TAG_VERSION = "2026-05-19.rebuild";
+  var TAG_VERSION = "2026-05-19.full-width-shell";
   var RAW_ASSET_BASE =
     "https://raw.githubusercontent.com/sogangCSmaster/hellenstein_pillow_abtest_sample/main/proposal/";
   var RAW_ORIGINAL_ASSET_BASE =
@@ -14,14 +14,31 @@
   var ORIGINAL_ASSET_BASE = (
     window.__HST_ORIGINAL_ASSET_BASE__ || RAW_ORIGINAL_ASSET_BASE
   ).replace(/\/?$/, "/");
-  var params = new URLSearchParams(window.location.search);
-  var isTargetProduct = params.get("product_no") === PRODUCT_NO;
-  var isExperiment = params.get("abtest") === "true";
-  var isDetailMode = params.get("detail") === "true";
+  var isTargetProduct = getQueryParam("product_no") === PRODUCT_NO;
+  var isExperiment = getQueryParam("abtest") === "true";
+  var isDetailMode = getQueryParam("detail") === "true";
 
   if (!isExperiment || !isTargetProduct) return;
   if (window.__HST_PILLOW_ABTEST_RENDERED__) return;
   window.__HST_PILLOW_ABTEST_RENDERED__ = true;
+
+  function getQueryParam(name) {
+    var query = window.location.search ? window.location.search.substring(1) : "";
+    var pairs = query ? query.split("&") : [];
+    var i;
+    var parts;
+    var key;
+
+    for (i = 0; i < pairs.length; i += 1) {
+      parts = pairs[i].split("=");
+      key = decodeURIComponent((parts[0] || "").replace(/\+/g, " "));
+      if (key === name) {
+        return decodeURIComponent((parts.slice(1).join("=") || "").replace(/\+/g, " "));
+      }
+    }
+
+    return "";
+  }
 
   var detailMeta = {
     hero: {
@@ -97,18 +114,24 @@
   };
 
   function pushEvent(eventName, payload) {
+    var eventPayload = {
+      event: eventName,
+      product_no: PRODUCT_NO,
+      detail_mode: isDetailMode,
+      asset_version: TAG_VERSION
+    };
+    var key;
+
+    if (payload) {
+      for (key in payload) {
+        if (Object.prototype.hasOwnProperty.call(payload, key)) {
+          eventPayload[key] = payload[key];
+        }
+      }
+    }
+
     window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push(
-      Object.assign(
-        {
-          event: eventName,
-          product_no: PRODUCT_NO,
-          detail_mode: isDetailMode,
-          asset_version: TAG_VERSION
-        },
-        payload || {}
-      )
-    );
+    window.dataLayer.push(eventPayload);
   }
 
   function asset(file) {
@@ -143,12 +166,33 @@
     return template.content.firstElementChild;
   }
 
+  function isMobileViewport() {
+    if (window.matchMedia) {
+      return window.matchMedia("(max-width: 767px)").matches;
+    }
+    return (window.innerWidth || document.documentElement.clientWidth || 0) <= 767;
+  }
+
   function injectStyle() {
     if (document.getElementById("hst-pillow-abtest-style")) return;
     var style = document.createElement("style");
     style.id = "hst-pillow-abtest-style";
     style.textContent = "\n      .hst-pdp, .hst-pdp * { box-sizing: border-box; }\n      .hst-pdp {\n        width: 100%;\n        max-width: 1000px;\n        margin: 0 auto;\n        font-family: -apple-system, BlinkMacSystemFont, \"Apple SD Gothic Neo\", \"Pretendard\", \"Noto Sans KR\", sans-serif;\n        color: #24211e;\n        background: #fffdf9;\n      }\n      .hst-block {\n        position: relative;\n        width: 100%;\n        margin: 0 auto;\n        background: #fffdf9;\n      }\n      .hst-image-block img {\n        display: block;\n        width: 100%;\n        height: auto;\n        margin: 0 auto;\n        border: 0;\n      }\n      .hst-html-block {\n        padding: 72px 56px;\n        border-top: 1px solid #ede3d7;\n      }\n      .hst-eyebrow {\n        display: inline-flex;\n        align-items: center;\n        height: 30px;\n        padding: 0 13px;\n        border-radius: 999px;\n        background: #3d4d43;\n        color: #fff;\n        font-size: 13px;\n        font-weight: 800;\n        letter-spacing: 0;\n      }\n      .hst-html-block h2 {\n        margin: 22px 0 16px;\n        font-size: 40px;\n        line-height: 1.18;\n        font-weight: 850;\n        letter-spacing: 0;\n        color: #1f2421;\n      }\n      .hst-html-block p {\n        margin: 0;\n        font-size: 18px;\n        line-height: 1.72;\n        color: #62675f;\n        letter-spacing: 0;\n      }\n      .hst-persona-grid,\n      .hst-comparison-table,\n      .hst-risk-grid {\n        margin-top: 34px;\n      }\n      .hst-review-card {\n        min-height: 230px;\n        padding: 22px 20px;\n        border: 1px solid #e5ddd2;\n        border-radius: 8px;\n        background: #fff;\n      }\n      .hst-review-card blockquote {\n        margin: 14px 0 16px;\n        font-size: 15px;\n        line-height: 1.62;\n        color: #32342f;\n      }\n      .hst-review-card footer {\n        font-size: 13px;\n        color: #7b7a73;\n      }\n      .hst-action-row {\n        display: flex;\n        flex-wrap: wrap;\n        gap: 10px;\n        align-items: center;\n        margin-top: 30px;\n      }\n      .hst-button {\n        appearance: none;\n        border: 1px solid #3d4d43;\n        border-radius: 4px;\n        background: #3d4d43;\n        color: #fff;\n        min-height: 46px;\n        padding: 0 18px;\n        font-size: 15px;\n        font-weight: 800;\n        cursor: pointer;\n      }\n      .hst-button.secondary {\n        background: #fff;\n        color: #3d4d43;\n      }\n      .hst-comparison-wrap {\n        overflow-x: auto;\n        border: 1px solid #e2d9ce;\n        border-radius: 8px;\n        background: #fff;\n      }\n      .hst-comparison-table {\n        width: 100%;\n        min-width: 720px;\n        border-collapse: collapse;\n        margin: 0;\n        font-size: 15px;\n      }\n      .hst-comparison-table th,\n      .hst-comparison-table td {\n        padding: 18px 16px;\n        border-bottom: 1px solid #ebe3d9;\n        text-align: left;\n        vertical-align: top;\n        line-height: 1.55;\n      }\n      .hst-comparison-table th {\n        background: #f7f2ea;\n        color: #3d4d43;\n        font-weight: 850;\n      }\n      .hst-comparison-table tr:last-child td {\n        border-bottom: 0;\n      }\n      .hst-comparison-table td:first-child {\n        width: 18%;\n        font-weight: 850;\n        color: #24211e;\n      }\n      .hst-comparison-table td:nth-child(2) {\n        background: #fffaf3;\n        color: #20231f;\n        font-weight: 720;\n      }\n      .hst-risk-grid {\n        display: grid;\n        grid-template-columns: repeat(3, minmax(0, 1fr));\n        gap: 14px;\n      }\n      .hst-risk-card {\n        padding: 22px 20px;\n        border: 1px solid #e3dacd;\n        border-radius: 8px;\n        background: #fff;\n      }\n      .hst-risk-card strong {\n        display: block;\n        margin-bottom: 10px;\n        color: #3d4d43;\n        font-size: 18px;\n      }\n      .hst-top-proof {\n        clear: both;\n        margin: 18px 0 24px;\n        padding: 18px 18px 16px;\n        border: 1px solid #e5ddd2;\n        border-radius: 8px;\n        background: #fffaf3;\n        font-family: -apple-system, BlinkMacSystemFont, \"Apple SD Gothic Neo\", \"Pretendard\", \"Noto Sans KR\", sans-serif;\n      }\n      .hst-top-proof strong {\n        display: block;\n        font-size: 18px;\n        line-height: 1.35;\n        color: #24211e;\n      }\n      .hst-top-proof p {\n        margin: 7px 0 0;\n        font-size: 13px;\n        line-height: 1.55;\n        color: #68645d;\n      }\n      .hst-top-proof button {\n        margin-top: 12px;\n        height: 36px;\n        padding: 0 13px;\n        border: 1px solid #3d4d43;\n        border-radius: 4px;\n        background: #3d4d43;\n        color: #fff;\n        font-size: 13px;\n        font-weight: 800;\n        cursor: pointer;\n      }\n      .hst-sticky-cta {\n        position: fixed;\n        z-index: 2147483000;\n        right: 24px;\n        bottom: 24px;\n        display: flex;\n        gap: 8px;\n        align-items: center;\n        padding: 10px;\n        border: 1px solid rgba(61, 77, 67, .18);\n        border-radius: 8px;\n        background: rgba(255, 253, 249, .96);\n        box-shadow: 0 12px 32px rgba(0, 0, 0, .16);\n        backdrop-filter: blur(10px);\n      }\n      .hst-sticky-cta button {\n        height: 42px;\n        border-radius: 4px;\n        border: 1px solid #3d4d43;\n        padding: 0 14px;\n        font-size: 14px;\n        font-weight: 850;\n        cursor: pointer;\n      }\n      .hst-sticky-cta .primary {\n        background: #3d4d43;\n        color: #fff;\n      }\n      .hst-sticky-cta .secondary {\n        background: #fff;\n        color: #3d4d43;\n      }\n      .hst-detail-highlight {\n        outline: 3px solid rgba(239, 68, 68, .9);\n        outline-offset: -3px;\n      }\n      .hst-detail-highlight::before {\n        content: \"\";\n        position: absolute;\n        inset: 0;\n        pointer-events: none;\n        background: rgba(255, 214, 102, .18);\n        z-index: 4;\n      }\n      .hst-detail-badge {\n        position: absolute;\n        z-index: 5;\n        top: 18px;\n        left: 18px;\n        max-width: min(430px, calc(100% - 36px));\n        padding: 14px 15px 13px;\n        border: 2px solid #ef4444;\n        border-radius: 8px;\n        background: rgba(255, 255, 255, .94);\n        color: #1f2421;\n        box-shadow: 0 12px 30px rgba(31, 36, 33, .18);\n        text-align: left;\n      }\n      .hst-detail-badge strong {\n        display: block;\n        font-size: 14px;\n        line-height: 1.35;\n        color: #b42318;\n      }\n      .hst-detail-badge span {\n        display: block;\n        margin-top: 4px;\n        font-size: 13px;\n        line-height: 1.45;\n        color: #544c43;\n      }\n      @media (max-width: 767px) {\n        html.hst-pillow-abtest-active,\n        html.hst-pillow-abtest-active body {\n          width: 100% !important;\n          max-width: 100% !important;\n          margin-left: 0 !important;\n          margin-right: 0 !important;\n          overflow-x: hidden !important;\n        }\n        html.hst-pillow-abtest-active #wrap,\n        html.hst-pillow-abtest-active #container,\n        html.hst-pillow-abtest-active #contentsWrap,\n        html.hst-pillow-abtest-active #contents-detail,\n        html.hst-pillow-abtest-active .detailArea,\n        html.hst-pillow-abtest-active .detail-left,\n        html.hst-pillow-abtest-active .detail-right,\n        html.hst-pillow-abtest-active .productDetail,\n        html.hst-pillow-abtest-active .prdimages,\n        html.hst-pillow-abtest-active .hst-pdp {\n          width: 100% !important;\n          max-width: 100% !important;\n          min-width: 0 !important;\n          margin-left: 0 !important;\n          margin-right: 0 !important;\n          float: none !important;\n        }\n        .hst-html-block {\n          padding: 48px 20px;\n        }\n        .hst-html-block h2 {\n          font-size: 29px;\n          line-height: 1.22;\n        }\n        .hst-html-block p {\n          font-size: 15px;\n          line-height: 1.72;\n        }\n        .hst-risk-grid {\n          grid-template-columns: 1fr;\n        }\n        .hst-sticky-cta {\n          left: 12px;\n          right: 12px;\n          bottom: 78px;\n          justify-content: stretch;\n        }\n        .hst-sticky-cta button {\n          flex: 1 1 0;\n          padding: 0 10px;\n        }\n        .hst-detail-badge {\n          position: relative;\n          top: auto;\n          left: auto;\n          max-width: none;\n          margin: 0;\n          border-radius: 0;\n          border-left: 3px solid #ef4444;\n          border-right: 3px solid #ef4444;\n        }\n      }\n    ";
     style.textContent +=
+      "\n      html.hst-pillow-abtest-full-detail .hst-full-detail-shell { clear: both; width: 100%; max-width: none; margin: 0 auto; padding: 0 0 80px; background: #fffdf9; }" +
+      "\n      html.hst-pillow-abtest-full-detail .hst-full-detail-shell::before { content: \"\"; display: table; clear: both; }" +
+      "\n      html.hst-pillow-abtest-full-detail .hst-full-detail-shell #stickyNav { position: sticky; top: 72px; z-index: 30; width: 100% !important; max-width: 1000px !important; margin: 0 auto !important; background: #fffdf9; }" +
+      "\n      html.hst-pillow-abtest-full-detail .hst-full-detail-shell #stickyNav .nav-list { display: flex; list-style: none; margin: 0; padding: 0; border-left: 1px solid #e3dacd; background: #fffdf9; }" +
+      "\n      html.hst-pillow-abtest-full-detail .hst-full-detail-shell #stickyNav .nav-item { flex: 1 1 0; margin: 0; padding: 0; text-align: center; }" +
+      "\n      html.hst-pillow-abtest-full-detail .hst-full-detail-shell #stickyNav .nav-item a { display: block; min-height: 48px; padding: 14px 12px; border-top: 1px solid #e3dacd; border-right: 1px solid #e3dacd; border-bottom: 1px solid #e3dacd; background: #fffdf9; color: #3d4d43; text-decoration: none; font-size: 15px; font-weight: 850; line-height: 1.35; }" +
+      "\n      html.hst-pillow-abtest-full-detail .hst-full-detail-shell #stickyNav .nav-item.active a { background: #3d4d43; color: #fff; }" +
+      "\n      html.hst-pillow-abtest-full-detail .hst-full-detail-shell .xans-product-additional, html.hst-pillow-abtest-full-detail .hst-full-detail-shell #prdDetail, html.hst-pillow-abtest-full-detail .hst-full-detail-shell #prdDetail .prdimages, html.hst-pillow-abtest-full-detail .hst-full-detail-shell .productDetail { width: 100% !important; max-width: none !important; min-width: 0 !important; margin-left: auto !important; margin-right: auto !important; float: none !important; clear: both !important; }" +
+      "\n      html.hst-pillow-abtest-full-detail .hst-full-detail-shell #prdDetail .prdimages { padding: 0 !important; text-align: initial !important; }" +
+      "\n      html.hst-pillow-abtest-full-detail .hst-full-detail-shell #prdReview, html.hst-pillow-abtest-full-detail .hst-full-detail-shell #prdQnA, html.hst-pillow-abtest-full-detail .hst-full-detail-shell .pc_detail_board { width: 100% !important; max-width: 1000px !important; margin-left: auto !important; margin-right: auto !important; }" +
+      "\n      html.hst-pillow-abtest-full-detail #detailguide { width: 100% !important; max-width: 1000px !important; margin-left: auto !important; margin-right: auto !important; clear: both !important; }" +
+      "\n      html.hst-pillow-abtest-full-detail .hst-full-detail-shell .hst-block, html.hst-pillow-abtest-full-detail .hst-full-detail-shell #prdReview, html.hst-pillow-abtest-full-detail .hst-full-detail-shell #prdQnA { scroll-margin-top: 120px; }" +
+      "\n      .hst-sticky-cta { opacity: 0 !important; pointer-events: none !important; transform: translateY(8px); transition: opacity .18s ease, transform .18s ease; }" +
+      "\n      .hst-sticky-cta.is-visible { opacity: 1 !important; pointer-events: auto !important; transform: translateY(0); }" +
       "\n      .hst-review-carousel { margin-top: 34px; display: flex; gap: 14px; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; padding: 0 4px 12px 0; -webkit-overflow-scrolling: touch; }" +
       "\n      .hst-review-carousel .hst-review-card { flex: 0 0 320px; scroll-snap-align: start; }" +
       "\n      .hst-review-card .hst-review-label { display: inline-flex; align-items: center; min-height: 28px; padding: 0 10px; border-radius: 999px; background: #f7f2ea; color: #3d4d43; font-size: 12px; font-weight: 850; }" +
@@ -156,7 +200,7 @@
       "\n      .hst-criteria-item { padding: 24px 24px 22px; border: 1px solid #e3dacd; border-radius: 8px; background: #fff; }" +
       "\n      .hst-criteria-item strong { display: block; margin-bottom: 10px; font-size: 18px; color: #24211e; }" +
       "\n      .hst-criteria-item p { font-size: 15px; line-height: 1.65; }" +
-      "\n      @media (max-width: 767px) { .hst-review-carousel { margin-left: -20px; margin-right: -20px; padding-left: 20px; padding-right: 20px; } .hst-review-carousel .hst-review-card { flex-basis: 82%; } .hst-criteria-list { grid-template-columns: 1fr; } }";
+      "\n      @media (max-width: 767px) { html.hst-pillow-abtest-full-detail .hst-full-detail-shell { padding-bottom: 40px; } html.hst-pillow-abtest-full-detail .hst-full-detail-shell #stickyNav { top: 94px; max-width: 100% !important; overflow-x: auto; } html.hst-pillow-abtest-full-detail .hst-full-detail-shell #stickyNav .nav-list { min-width: 330px; } html.hst-pillow-abtest-full-detail .hst-full-detail-shell #stickyNav .nav-item a { min-height: 42px; padding: 12px 10px; font-size: 13px; white-space: nowrap; } .hst-sticky-cta { display: none !important; } .hst-review-carousel { margin-left: -20px; margin-right: -20px; padding-left: 20px; padding-right: 20px; } .hst-review-carousel .hst-review-card { flex-basis: 82%; } .hst-criteria-list { grid-template-columns: 1fr; } }";
     document.head.appendChild(style);
   }
 
@@ -293,7 +337,7 @@
     var reviews = collectReviews();
     return htmlBlock(
       "social-proof",
-      "\n        <span class=\"hst-eyebrow\">실제 사용 후기</span>\n        <h2>숫자보다, 실제 사용감을 먼저 보여줍니다</h2>\n        <p>후기 수를 크게 반복하기보다 실제 리뷰에서 반복되는 높이 조절, 목 지지감, 관리 편의성 이야기를 가로로 넘겨볼 수 있게 배치합니다.</p>\n        <div class=\"hst-review-carousel\" aria-label=\"실제 사용 후기 캐러셀\">" + (reviewCards(reviews)) + "</div>\n        <div class=\"hst-action-row\">\n          <button class=\"hst-button\" type=\"button\" data-hst-review-jump>전체 후기 보기</button>\n        </div>\n      ",
+      "\n        <span class=\"hst-eyebrow\">실제 사용 후기</span>\n        <h2>먼저 써본 분들의 사용감</h2>\n        <p>높이 조절이 쉬웠는지, 목을 받쳐주는 느낌이 어땠는지 실제 후기로 확인하세요.</p>\n        <div class=\"hst-review-carousel\" aria-label=\"실제 사용 후기 캐러셀\">" + (reviewCards(reviews)) + "</div>\n        <div class=\"hst-action-row\">\n          <button class=\"hst-button\" type=\"button\" data-hst-review-jump>후기 확인하기</button>\n        </div>\n      ",
       detailMeta.social
     );
   }
@@ -317,7 +361,7 @@
   function purchaseCriteriaBlock() {
     return htmlBlock(
       "purchase-criteria",
-      "\n        <span class=\"hst-eyebrow\">구매 전 확인 기준</span>\n        <h2>내게 맞는지 판단할 기준을 먼저 정리합니다</h2>\n        <p>일반적인 문답 섹션 대신 실제 구매 전에 비교하게 되는 기준을 순서대로 보여줍니다. 베개를 고르는 이유가 분명해질수록 가격 비교보다 내 몸에 맞는지 판단하기 쉬워집니다.</p>\n        <div class=\"hst-criteria-list\">\n          <div class=\"hst-criteria-item\"><strong>높이: 낮게 시작해 한 단계씩 맞추기</strong><p>처음부터 높은 세팅을 고정하지 않고, 기본 높이에서 시작해 목과 어깨 느낌에 맞춰 패드를 조절하는 흐름으로 안내합니다.</p></div>\n          <div class=\"hst-criteria-item\"><strong>자세: 바로 눕기와 옆잠을 같이 보기</strong><p>정면으로 누웠을 때의 목 지지감과 옆으로 누웠을 때 머리·목 라인이 함께 맞는지 확인하도록 구조 정보를 이어서 배치합니다.</p></div>\n          <div class=\"hst-criteria-item\"><strong>적응: 첫날 느낌만으로 판단하지 않기</strong><p>경추 베개는 체형과 수면 습관에 따라 적응감이 달라질 수 있으므로, 조절 방법과 공식 교환·반품 기준을 함께 확인하게 합니다.</p></div>\n          <div class=\"hst-criteria-item\"><strong>관리: 매일 쓰는 침구답게 확인하기</strong><p>커버, 세탁, 케어 가이드, 제품 스펙을 하단에서 다시 확인하게 해 오래 쓰는 침구의 관리 불안을 줄입니다.</p></div>\n          <div class=\"hst-criteria-item\"><strong>선물: 높이 취향을 몰라도 설명하기 쉽게</strong><p>부모님이나 가족 선물 맥락에서는 조절형 구조와 사용 가이드가 있다는 점을 중심으로 선택 이유를 만들 수 있습니다.</p></div>\n        </div>\n      ",
+      "\n        <span class=\"hst-eyebrow\">구매 전 확인 기준</span>\n        <h2>내게 맞는 베개인지 확인하는 기준</h2>\n        <p>처음에는 기본 높이로 시작하고, 자세와 관리 방식까지 함께 보면 선택이 쉬워집니다.</p>\n        <div class=\"hst-criteria-list\">\n          <div class=\"hst-criteria-item\"><strong>높이: 낮게 시작해 한 단계씩 맞추기</strong><p>처음부터 높은 세팅을 고정하지 않고, 기본 높이에서 시작해 목과 어깨 느낌에 맞춰 패드를 조절합니다.</p></div>\n          <div class=\"hst-criteria-item\"><strong>자세: 바로 눕기와 옆잠을 같이 보기</strong><p>정면으로 누웠을 때의 목 지지감과 옆으로 누웠을 때 머리·목 라인이 함께 맞는지 확인합니다.</p></div>\n          <div class=\"hst-criteria-item\"><strong>적응: 첫날 느낌만으로 판단하지 않기</strong><p>경추 베개는 체형과 수면 습관에 따라 적응감이 달라질 수 있어 조절 방법과 공식 교환·반품 기준을 함께 확인합니다.</p></div>\n          <div class=\"hst-criteria-item\"><strong>관리: 매일 쓰는 침구답게 확인하기</strong><p>커버, 세탁, 케어 가이드, 제품 스펙을 함께 확인하면 오래 쓰는 침구의 관리 부담을 줄일 수 있습니다.</p></div>\n          <div class=\"hst-criteria-item\"><strong>선물: 높이 취향을 몰라도 설명하기 쉽게</strong><p>부모님이나 가족 선물이라면 조절형 구조와 사용 가이드가 있는지 먼저 확인하는 편이 좋습니다.</p></div>\n        </div>\n      ",
       detailMeta.criteria
     );
   }
@@ -362,24 +406,27 @@
     var box = document.querySelector(".infoAreabox");
     if (!box || document.querySelector(".hst-top-proof")) return;
     var proof = createElement(
-      "\n      <div class=\"hst-top-proof\">\n        <strong>실제 후기에서 반복되는 만족 포인트</strong>\n        <p>높이 조절, 목 지지감, 관리 편의성을 구매 전에 먼저 확인하세요.</p>\n        <button type=\"button\" data-hst-review-jump>실제 후기 먼저 보기</button>\n      </div>\n      "
+      "\n      <div class=\"hst-top-proof\">\n        <strong>먼저 써본 분들의 사용감</strong>\n        <p>높이 조절과 목 지지감은 실제 후기로 먼저 확인할 수 있습니다.</p>\n        <button type=\"button\" data-hst-review-jump>후기 확인하기</button>\n      </div>\n      "
     );
     box.parentNode.insertBefore(proof, box.nextSibling);
   }
 
   function injectStickyCta() {
+    if (isMobileViewport()) return;
     if (document.querySelector(".hst-sticky-cta")) return;
     var sticky = createElement(
-      "\n      <div class=\"hst-sticky-cta\" role=\"region\" aria-label=\"내 목의 베개 빠른 이동\">\n        <button type=\"button\" class=\"primary\" data-hst-purchase-jump>옵션 확인</button>\n        <button type=\"button\" class=\"secondary\" data-hst-review-jump>후기 보기</button>\n      </div>\n      "
+      "\n      <div class=\"hst-sticky-cta\" role=\"region\" aria-label=\"내 목의 베개 빠른 이동\">\n        <button type=\"button\" class=\"primary\" data-hst-purchase-jump>구매 옵션 보기</button>\n        <button type=\"button\" class=\"secondary\" data-hst-review-jump>후기 보기</button>\n      </div>\n      "
     );
     document.body.appendChild(sticky);
+    bindStickyVisibility(sticky);
   }
 
   function findPurchaseTarget() {
     return (
+      document.querySelector(".detail-right .infoAreabox") ||
       document.querySelector(".detail-right .infoArea") ||
-      document.querySelector(".detail-right #orderFixItem") ||
       document.querySelector(".detail-right") ||
+      document.querySelector(".detail-right #orderFixItem") ||
       document.querySelector("#orderFixItem")
     );
   }
@@ -387,6 +434,113 @@
   function scrollToElement(target) {
     if (!target) return;
     target.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  function bindStickyVisibility(sticky) {
+    var purchaseTarget = findPurchaseTarget();
+    var scrollTimer = null;
+
+    if (!sticky || isMobileViewport()) {
+      if (sticky) sticky.classList.remove("is-visible");
+      return;
+    }
+
+    if (!purchaseTarget) {
+      sticky.classList.add("is-visible");
+      return;
+    }
+
+    function update() {
+      var rect = purchaseTarget.getBoundingClientRect();
+      var viewportHeight = window.innerHeight || document.documentElement.clientHeight || 0;
+      var isPurchaseVisible = rect.bottom > 80 && rect.top < viewportHeight - 120;
+      if (isPurchaseVisible) {
+        sticky.classList.remove("is-visible");
+      } else {
+        sticky.classList.add("is-visible");
+      }
+    }
+
+    function throttledUpdate() {
+      if (scrollTimer) return;
+      scrollTimer = window.setTimeout(function () {
+        scrollTimer = null;
+        update();
+      }, 80);
+    }
+
+    if ("IntersectionObserver" in window) {
+      var observer = new IntersectionObserver(
+        function (entries) {
+          var visible = false;
+          var i;
+          for (i = 0; i < entries.length; i += 1) {
+            if (entries[i].isIntersecting) visible = true;
+          }
+          if (visible) {
+            sticky.classList.remove("is-visible");
+          } else {
+            sticky.classList.add("is-visible");
+          }
+        },
+        { root: null, threshold: 0.05, rootMargin: "-80px 0px -120px 0px" }
+      );
+      observer.observe(purchaseTarget);
+    } else {
+      window.addEventListener("scroll", throttledUpdate);
+    }
+
+    window.addEventListener("resize", throttledUpdate);
+    update();
+  }
+
+  function ensureFullDetailShell() {
+    var detailArea = document.querySelector(".detailArea");
+    var additional =
+      document.querySelector(".detail-left .xans-product-additional") ||
+      document.querySelector(".hst-full-detail-shell .xans-product-additional");
+    var stickyNav =
+      document.querySelector(".detail-left #stickyNav") ||
+      document.querySelector(".hst-full-detail-shell #stickyNav");
+    var detailGuide = document.querySelector(".detail-right #detailguide");
+    var shell = document.querySelector(".hst-full-detail-shell");
+
+    if (!detailArea || !detailArea.parentNode || !additional) return null;
+
+    if (!shell) {
+      shell = document.createElement("div");
+      shell.className = "hst-full-detail-shell";
+      shell.setAttribute("data-hst-layout", "full-detail-shell");
+      if (detailArea.nextSibling) {
+        detailArea.parentNode.insertBefore(shell, detailArea.nextSibling);
+      } else {
+        detailArea.parentNode.appendChild(shell);
+      }
+    }
+
+    if (stickyNav && stickyNav.parentNode !== shell) {
+      shell.appendChild(stickyNav);
+    }
+
+    if (additional.parentNode !== shell) {
+      shell.appendChild(additional);
+    }
+
+    if (detailGuide && shell.parentNode && detailGuide.parentNode !== shell.parentNode) {
+      if (shell.nextSibling) {
+        shell.parentNode.insertBefore(detailGuide, shell.nextSibling);
+      } else {
+        shell.parentNode.appendChild(detailGuide);
+      }
+    }
+
+    shell.classList.add("is-ready");
+    additional.classList.add("hst-additional-relocated");
+
+    return {
+      shell: shell,
+      target: additional.querySelector("#prdDetail .prdimages")
+    };
   }
 
   function bindActions(root) {
@@ -415,7 +569,17 @@
     injectStyle();
     document.documentElement.classList.add("hst-pillow-abtest-active");
 
-    var target = document.querySelector("#prdDetail .prdimages");
+    var layout = ensureFullDetailShell();
+    var target = layout && layout.target ? layout.target : document.querySelector("#prdDetail .prdimages");
+
+    if (layout && layout.target) {
+      document.documentElement.classList.add("hst-pillow-abtest-full-detail");
+    } else if (target) {
+      pushEvent("hellenstein_pillow_abtest_layout_fallback", {
+        reason: "full_detail_shell_unavailable"
+      });
+    }
+
     if (!target) {
       window.__HST_PILLOW_ABTEST_RENDERED__ = false;
       return false;

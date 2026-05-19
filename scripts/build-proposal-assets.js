@@ -275,7 +275,7 @@ async function buildSolution() {
         ${text({ x: 500, y: 780, value: "4분할 지지", size: 22, weight: 750, color: C.muted, anchor: "middle" })}
         ${text({ x: 803, y: 780, value: "안전성 검증", size: 22, weight: 750, color: C.muted, anchor: "middle" })}
         ${rect({ x: 72, y: 1055, w: 856, h: 170, fill: "#ffffff", rx: 22, stroke: C.line })}
-        ${text({ x: 500, y: 1138, value: "아래에서 제품 구조와 개발 스토리를 크게 확인하세요", size: 28, weight: 850, color: C.sage, anchor: "middle", max: 30 })}
+        ${text({ x: 500, y: 1138, value: "높이 · 구조 · 소재를 한 제품 안에 담았습니다", size: 28, weight: 850, color: C.sage, anchor: "middle", max: 30 })}
       `),
       left: 0,
       top: 0,
@@ -364,7 +364,7 @@ async function buildAuthority() {
     {
       input: svg(`
         ${pill({ x: 70, y: 92, value: "신뢰 요소", w: 118 })}
-        ${text({ x: 70, y: 198, value: ["인증과 테스트를", "한 번에 묶어 보여줍니다"], size: 54, weight: 900, lh: 1.12 })}
+        ${text({ x: 70, y: 198, value: ["인증과 테스트를", "한 번에 확인합니다"], size: 54, weight: 900, lh: 1.12 })}
         ${text({
           x: 74,
           y: 365,
@@ -384,7 +384,7 @@ async function buildAuthority() {
         ${text({ x: 207, y: 820, value: "공기 투과도", size: 22, weight: 750, color: C.muted, anchor: "middle" })}
         ${text({ x: 500, y: 820, value: "소재 안전성", size: 22, weight: 750, color: C.muted, anchor: "middle" })}
         ${text({ x: 793, y: 820, value: "세탁 견뢰도", size: 22, weight: 750, color: C.muted, anchor: "middle" })}
-        ${text({ x: 500, y: 1110, value: "아래에서 인증과 테스트 내용을 크게 확인하세요", size: 28, weight: 850, color: C.sage, anchor: "middle", max: 32 })}
+        ${text({ x: 500, y: 1110, value: "매일 쓰는 침구라서 소재와 내구성까지 확인했습니다", size: 28, weight: 850, color: C.sage, anchor: "middle", max: 32 })}
       `),
       left: 0,
       top: 0,

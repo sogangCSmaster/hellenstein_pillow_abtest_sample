@@ -66,14 +66,21 @@ NODE_PATH=/Users/yuseungjae/.cache/codex-runtimes/codex-primary-runtime/dependen
 - 상품 정보 영역 상단 신뢰 모듈
 - Solution 이후 실제 리뷰 요약 모듈
 - 비교표, 적응 기간 안내, 구매 전 확인 기준
-- 하단 Sticky CTA
+- PC 조건부 Sticky CTA
+- 모바일 기본 Cafe24 구매바 유지
 - `detail=true`일 때 PPTX 기반 설명 패널
+
+GTM은 `#prdDetail .prdimages`만 바꾸는 방식이 아니라, 상세 추가정보 영역을
+`.detailArea` 바깥의 full-width shell로 옮겨 PC에서도 제안 PDP 본문이 1000px
+중심 정렬 상세페이지처럼 보이게 합니다. 구매 폼, 옵션, 장바구니, 구매 버튼은
+기존 Cafe24 영역을 그대로 사용합니다.
 
 GTM 태그는 아래 이벤트를 `dataLayer`에 push합니다.
 
 - `hellenstein_pillow_abtest_rendered`
 - `hellenstein_pillow_abtest_sticky_cta_click`
 - `hellenstein_pillow_abtest_review_jump_click`
+- `hellenstein_pillow_abtest_layout_fallback`
 
 이미지 URL은 레포를 `main` 브랜치에 push한 뒤 아래 형태로 사용됩니다.
 
