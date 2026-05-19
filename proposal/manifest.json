@@ -1,0 +1,86 @@
+{
+  "generated_at": "2026-05-19T09:33:49.666Z",
+  "source_deck": "hellenstein-pdp-redesign-v3.pptx",
+  "source_page": "https://hellenstein.co.kr/product/detail.html?product_no=8461&cate_no=906&display_group=1",
+  "note": "AI-generated static PDP image cuts only. Clickable CTA/review modules are inserted by GTM HTML, not embedded in images.",
+  "assets": [
+    {
+      "file": "01-hero.webp",
+      "source": "generated-cuts/01-hero.png",
+      "width": 1000,
+      "height": 1500
+    },
+    {
+      "file": "02-problem.webp",
+      "source": "generated-cuts/02-problem.png",
+      "width": 1000,
+      "height": 1500
+    },
+    {
+      "file": "03-agitation.webp",
+      "source": "generated-cuts/03-agitation.png",
+      "width": 1000,
+      "height": 1500
+    },
+    {
+      "file": "04-solution.webp",
+      "source": "generated-cuts/04-solution.png",
+      "width": 1000,
+      "height": 1500
+    },
+    {
+      "file": "05-social-proof.webp",
+      "source": "generated-cuts/05-social-proof.png",
+      "width": 1000,
+      "height": 1500
+    },
+    {
+      "file": "06-fab-height.webp",
+      "source": "generated-cuts/06-fab-height.png",
+      "width": 1000,
+      "height": 1500
+    },
+    {
+      "file": "07-fab-structure.webp",
+      "source": "generated-cuts/07-fab-structure.png",
+      "width": 1000,
+      "height": 1500
+    },
+    {
+      "file": "08-authority.webp",
+      "source": "generated-cuts/08-authority.png",
+      "width": 1000,
+      "height": 1500
+    },
+    {
+      "file": "09-comparison.webp",
+      "source": "generated-cuts/09-comparison.png",
+      "width": 1000,
+      "height": 1500
+    },
+    {
+      "file": "10-who-for.webp",
+      "source": "generated-cuts/10-who-for.png",
+      "width": 1000,
+      "height": 1500
+    },
+    {
+      "file": "11-risk-reversal.webp",
+      "source": "generated-cuts/11-risk-reversal.png",
+      "width": 1000,
+      "height": 1500
+    },
+    {
+      "file": "12-faq.webp",
+      "source": "generated-cuts/12-faq.png",
+      "width": 1000,
+      "height": 1500
+    },
+    {
+      "file": "13-final.webp",
+      "source": "generated-cuts/13-final.png",
+      "width": 1000,
+      "height": 1500
+    }
+  ]
+}

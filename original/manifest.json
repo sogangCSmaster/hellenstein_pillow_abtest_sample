@@ -1,0 +1,295 @@
+{
+  "source_page": "https://hellenstein.co.kr/product/detail.html?product_no=8461&cate_no=906&display_group=1",
+  "source_html": "/tmp/hellenstein_product_8461.html",
+  "downloaded_at": "2026-05-19T08:55:40.157071+00:00",
+  "images": [
+    {
+      "index": 1,
+      "file": "original/01_notice.webp",
+      "source_url": "https://www.lydiarnc.com/he/common/notice.webp",
+      "alt": "헬렌스타인 전체공지",
+      "bytes": 3004,
+      "content_type": "image/webp"
+    },
+    {
+      "index": 2,
+      "file": "original/02_notice.webp",
+      "source_url": "https://www.lydiarnc.com/he/pillow/my_neck_pillow/notice.webp",
+      "alt": "헬렌스타인_베개_내 목의 배개 공지사항",
+      "bytes": 142,
+      "content_type": "image/webp"
+    },
+    {
+      "index": 3,
+      "file": "original/03_he_brand.webp",
+      "source_url": "https://www.lydiarnc.com/he/common/he_brand.webp",
+      "alt": "헬렌스타인",
+      "bytes": 194506,
+      "content_type": "image/webp"
+    },
+    {
+      "index": 4,
+      "file": "original/04_1_intro.webp",
+      "source_url": "https://www.lydiarnc.com/he/pillow/my_neck_pillow/1_intro.webp",
+      "alt": "헬렌스타인 내 목의 베개 베개 결정이 어려운 이유",
+      "bytes": 1099228,
+      "content_type": "image/webp"
+    },
+    {
+      "index": 5,
+      "file": "original/05_1_intro_2.webp",
+      "source_url": "https://www.lydiarnc.com/he/pillow/my_neck_pillow/1_intro_2.webp",
+      "alt": "헬렌스타인 내 목의 베개 하나의 형태의 베개",
+      "bytes": 167176,
+      "content_type": "image/webp"
+    },
+    {
+      "index": 6,
+      "file": "original/06_1_intro_3.webp",
+      "source_url": "https://www.lydiarnc.com/he/pillow/my_neck_pillow/1_intro_3.webp",
+      "alt": "헬렌스타인 내 목의 베개 베개의 기준 재 정의",
+      "bytes": 20138,
+      "content_type": "image/webp"
+    },
+    {
+      "index": 7,
+      "file": "original/07_1_intro_4.webp",
+      "source_url": "https://www.lydiarnc.com/he/pillow/my_neck_pillow/1_intro_4.webp",
+      "alt": "헬렌스타인 내 목의 베개 고정되지 않은 베개 구조",
+      "bytes": 266724,
+      "content_type": "image/webp"
+    },
+    {
+      "index": 8,
+      "file": "original/08_2_main.webp",
+      "source_url": "https://www.lydiarnc.com/he/pillow/my_neck_pillow/2_main.webp",
+      "alt": "헬렌스타인 내 목의 베개 메인 이미지",
+      "bytes": 2047168,
+      "content_type": "image/webp"
+    },
+    {
+      "index": 9,
+      "file": "original/09_3_story.webp",
+      "source_url": "https://www.lydiarnc.com/he/pillow/my_neck_pillow/3_story.webp",
+      "alt": "헬렌스타인 내 목의 베개 5년간 반복 테스트로 설계",
+      "bytes": 1432164,
+      "content_type": "image/webp"
+    },
+    {
+      "index": 10,
+      "file": "original/10_4_point1_1.webp",
+      "source_url": "https://www.lydiarnc.com/he/pillow/my_neck_pillow/4_point1_1.webp",
+      "alt": "헬렌스타인 내 목의 베개 실패를 구조적으로 베개",
+      "bytes": 609356,
+      "content_type": "image/webp"
+    },
+    {
+      "index": 11,
+      "file": "original/11_4_point1_2.webp",
+      "source_url": "https://www.lydiarnc.com/he/pillow/my_neck_pillow/4_point1_2.webp",
+      "alt": "헬렌스타인 내 목의 베개 완벽한 구조의 베개",
+      "bytes": 242470,
+      "content_type": "image/webp"
+    },
+    {
+      "index": 12,
+      "file": "original/12_4_point2_1.webp",
+      "source_url": "https://www.lydiarnc.com/he/pillow/my_neck_pillow/4_point2_1.webp",
+      "alt": "헬렌스타인 내 목의 베개 목을 기준으로 설계",
+      "bytes": 1034584,
+      "content_type": "image/webp"
+    },
+    {
+      "index": 13,
+      "file": "original/13_4_point2_2.webp",
+      "source_url": "https://www.lydiarnc.com/he/pillow/my_neck_pillow/4_point2_2.webp",
+      "alt": "헬렌스타인 내 목의 베개 4가지 높이 조절",
+      "bytes": 2438898,
+      "content_type": "image/webp"
+    },
+    {
+      "index": 14,
+      "file": "original/14_4_point2_3.webp",
+      "source_url": "https://www.lydiarnc.com/he/pillow/my_neck_pillow/4_point2_3.webp",
+      "alt": "헬렌스타인 내 목의 베개 4단계 높이 조절 가이드",
+      "bytes": 479080,
+      "content_type": "image/webp"
+    },
+    {
+      "index": 15,
+      "file": "original/15_4_point3_1.webp",
+      "source_url": "https://www.lydiarnc.com/he/pillow/my_neck_pillow/4_point3_1.webp",
+      "alt": "헬렌스타인 내 목의 베개 인체 구조에 맞는 4분할 구조",
+      "bytes": 272794,
+      "content_type": "image/webp"
+    },
+    {
+      "index": 16,
+      "file": "original/16_4_point3_2.webp",
+      "source_url": "https://www.lydiarnc.com/he/pillow/my_neck_pillow/4_point3_2.webp",
+      "alt": "헬렌스타인 내 목의 베개 미세 조절 설명",
+      "bytes": 450224,
+      "content_type": "image/webp"
+    },
+    {
+      "index": 17,
+      "file": "original/17_4_point3_4.webp",
+      "source_url": "https://www.lydiarnc.com/he/pillow/my_neck_pillow/4_point3_4.webp",
+      "alt": "헬렌스타인 내 목의 베개 소재",
+      "bytes": 472216,
+      "content_type": "image/webp"
+    },
+    {
+      "index": 18,
+      "file": "original/18_4_point4.webp",
+      "source_url": "https://www.lydiarnc.com/he/pillow/my_neck_pillow/4_point4.webp",
+      "alt": "헬렌스타인 내 목의 베개 핵심 포인트",
+      "bytes": 599496,
+      "content_type": "image/webp"
+    },
+    {
+      "index": 19,
+      "file": "original/19_4_point4_1.webp",
+      "source_url": "https://www.lydiarnc.com/he/pillow/my_neck_pillow/4_point4_1.webp",
+      "alt": "헬렌스타인 내 목의 베개 형태",
+      "bytes": 1126864,
+      "content_type": "image/webp"
+    },
+    {
+      "index": 20,
+      "file": "original/20_4_point4_3.webp",
+      "source_url": "https://www.lydiarnc.com/he/pillow/my_neck_pillow/4_point4_3.webp",
+      "alt": "헬렌스타인 내 목의 베개 압력 분산 원리",
+      "bytes": 536296,
+      "content_type": "image/webp"
+    },
+    {
+      "index": 21,
+      "file": "original/21_4_point5_2.webp",
+      "source_url": "https://www.lydiarnc.com/he/pillow/my_neck_pillow/4_point5_2.webp",
+      "alt": "헬렌스타인 내 목의 베개 FITI 공기 투과도 인증서",
+      "bytes": 41474,
+      "content_type": "image/webp"
+    },
+    {
+      "index": 22,
+      "file": "original/22_4_point5_3.webp",
+      "source_url": "https://www.lydiarnc.com/he/pillow/my_neck_pillow/4_point5_3.webp",
+      "alt": "헬렌스타인 내 목의 베개 전용 커버 증정",
+      "bytes": 467736,
+      "content_type": "image/webp"
+    },
+    {
+      "index": 23,
+      "file": "original/23_4_point6_1.webp",
+      "source_url": "https://www.lydiarnc.com/he/pillow/my_neck_pillow/4_point6_1.webp",
+      "alt": "헬렌스타인 내 목의 베개 안전 인증",
+      "bytes": 1406954,
+      "content_type": "image/webp"
+    },
+    {
+      "index": 24,
+      "file": "original/24_4_point6_2.webp",
+      "source_url": "https://www.lydiarnc.com/he/pillow/my_neck_pillow/4_point6_2.webp",
+      "alt": "헬렌스타인 내 목의 베개 내구성 세탁 견뢰도 인증",
+      "bytes": 878816,
+      "content_type": "image/webp"
+    },
+    {
+      "index": 25,
+      "file": "original/25_4_point7.webp",
+      "source_url": "https://www.lydiarnc.com/he/pillow/my_neck_pillow/4_point7.webp",
+      "alt": "헬렌스타인 내 목의 베개 아침을 바꾸는 베개",
+      "bytes": 413028,
+      "content_type": "image/webp"
+    },
+    {
+      "index": 26,
+      "file": "original/26_5_composition.webp",
+      "source_url": "https://www.lydiarnc.com/he/pillow/my_neck_pillow/5_composition.webp",
+      "alt": "헬렌스타인 내 목의 베개 제품 구성품",
+      "bytes": 311878,
+      "content_type": "image/webp"
+    },
+    {
+      "index": 27,
+      "file": "original/27_5_composition_1.webp",
+      "source_url": "https://www.lydiarnc.com/he/pillow/my_neck_pillow/5_composition_1.webp",
+      "alt": "헬렌스타인 내 목의 베개 선물용 베개",
+      "bytes": 465668,
+      "content_type": "image/webp"
+    },
+    {
+      "index": 28,
+      "file": "original/28_6_Recommend.webp",
+      "source_url": "https://www.lydiarnc.com/he/pillow/my_neck_pillow/6_Recommend.webp",
+      "alt": "헬렌스타인 내 목의 베개 추천합니다",
+      "bytes": 342976,
+      "content_type": "image/webp"
+    },
+    {
+      "index": 29,
+      "file": "original/29_7_guide.webp",
+      "source_url": "https://www.lydiarnc.com/he/pillow/my_neck_pillow/7_guide.webp",
+      "alt": "헬렌스타인 내 목의 베개 사용 가이드",
+      "bytes": 682306,
+      "content_type": "image/webp"
+    },
+    {
+      "index": 30,
+      "file": "original/30_7_guide_1.webp",
+      "source_url": "https://www.lydiarnc.com/he/pillow/my_neck_pillow/7_guide_1.webp",
+      "alt": "헬렌스타인 내 목의 베개 자세마다 활용 가이드",
+      "bytes": 472730,
+      "content_type": "image/webp"
+    },
+    {
+      "index": 31,
+      "file": "original/31_8_q_a.webp",
+      "source_url": "https://www.lydiarnc.com/he/pillow/my_neck_pillow/8_q&a.webp",
+      "alt": "헬렌스타인 내 목의 베개 q&a",
+      "bytes": 99288,
+      "content_type": "image/webp"
+    },
+    {
+      "index": 32,
+      "file": "original/32_9_careguide.webp",
+      "source_url": "https://www.lydiarnc.com/he/pillow/my_neck_pillow/9_careguide.webp",
+      "alt": "헬렌스타인 내 목의 베개 careguide",
+      "bytes": 480344,
+      "content_type": "image/webp"
+    },
+    {
+      "index": 33,
+      "file": "original/33_10_gallery.webp",
+      "source_url": "https://www.lydiarnc.com/he/pillow/my_neck_pillow/10_gallery.webp",
+      "alt": "헬렌스타인 내 목의 베개 제품 갤러리",
+      "bytes": 2168296,
+      "content_type": "image/webp"
+    },
+    {
+      "index": 34,
+      "file": "original/34_11_spec.webp",
+      "source_url": "https://www.lydiarnc.com/he/pillow/my_neck_pillow/11_spec.webp",
+      "alt": "헬렌스타인 내목의 베개 제품 스펙",
+      "bytes": 179924,
+      "content_type": "image/webp"
+    },
+    {
+      "index": 35,
+      "file": "original/35_12_washing.webp",
+      "source_url": "https://www.lydiarnc.com/he/pillow/my_neck_pillow/12_washing.webp",
+      "alt": "헬렌스타인 내 목의 베개 세탁 방법",
+      "bytes": 121986,
+      "content_type": "image/webp"
+    },
+    {
+      "index": 36,
+      "file": "original/36_he_info_wash.webp",
+      "source_url": "https://www.lydiarnc.com/he/common/he_info_wash.webp",
+      "alt": "침구류세탁정보",
+      "bytes": 369560,
+      "content_type": "image/webp"
+    }
+  ]
+}
