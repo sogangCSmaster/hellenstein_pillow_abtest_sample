@@ -29,7 +29,8 @@ https://hellenstein.co.kr/product/detail.html?product_no=8461&cate_no=906&displa
 - `proposal/`: GTM에서 사용할 WebP 배포용 이미지 컷과 `manifest.json`
 - `docs/pptx-strategy.md`: PPTX 12블록을 실제 PDP 구조로 재해석한 기준 문서
 - `scripts/build-proposal-assets.js`: 원본/생성 이미지를 조합해 배포용 컷과 컨택트시트를 만드는 빌드 스크립트
-- `gtm/hellenstein-pillow-abtest.custom-html.html`: GTM Custom HTML 태그 본문
+- `gtm/hellenstein-pillow-abtest.source.html`: 유지보수용 GTM 태그 원본
+- `gtm/hellenstein-pillow-abtest.custom-html.html`: GTM에 그대로 붙여넣는 ES3 컴파일 태그 본문
 - `detail.html`: 실제 상세페이지 소스를 로컬에 저장한 참고 파일
 - `hellenstein-pdp-redesign-v3.pptx`: 제안 구조의 기준이 된 발표 자료
 
@@ -56,6 +57,14 @@ NODE_PATH=/Users/yuseungjae/.cache/codex-runtimes/codex-primary-runtime/dependen
    - Page URL contains `product_no=8461`
    - Page URL contains `abtest=true`
 4. `detail=true` 여부는 태그 내부에서 URL 파라미터를 읽어 자동 분기한다.
+
+`custom-html.html`은 Google Tag Manager의 오래된 JavaScript 파서에서 안전하게 통과하도록
+컴파일된 배포 산출물입니다. 태그를 수정할 때는 `source.html`을 먼저 고친 뒤 아래 명령으로
+`custom-html.html`을 다시 생성합니다.
+
+```bash
+node scripts/compile-gtm-tag.js
+```
 
 ## Implementation Boundary
 
