@@ -1,56 +1,76 @@
 {
-  "generated_at": "2026-05-19T13:28:51.219Z",
+  "generated_at": "2026-05-19T15:58:58.353Z",
   "source_deck": "hellenstein-pdp-redesign-v3.pptx",
   "source_strategy": "docs/pptx-strategy.md",
-  "rule": "Image cuts may include customer-facing Korean copy rendered by this script. Original PDP images are not composited into proposal cuts; GTM inserts selected originals as standalone full-width image blocks. Clickable UI, GTM explanation overlays, reviews, comparison, purchase criteria, and sticky CTA are HTML.",
+  "rule": "Raw imagegen cuts contain no embedded text, logos, fake marks, CTA, or UI. Korean customer-facing copy is rendered by this build script in Pretendard. Original PDP images are not composited into proposal cuts; GTM inserts selected originals as standalone full-width image blocks. Clickable UI, reviews, comparison, purchase criteria, sticky CTA, and detail=true explanations are HTML.",
   "assets": [
     {
       "file": "01-hero.webp",
+      "raw_source": "assets/generated/01-hero-raw.png",
+      "prompt_block": "Block 01 Hero",
       "width": 1000,
       "height": 1500
     },
     {
       "file": "02-problem.webp",
+      "raw_source": "assets/generated/02-problem-raw.png",
+      "prompt_block": "Block 02 Problem",
       "width": 1000,
       "height": 1500
     },
     {
       "file": "03-agitation.webp",
+      "raw_source": "assets/generated/03-agitation-raw.png",
+      "prompt_block": "Block 03 Agitation",
       "width": 1000,
       "height": 1500
     },
     {
       "file": "04-solution.webp",
+      "raw_source": "assets/generated/04-solution-raw.png",
+      "prompt_block": "Block 04 Solution",
       "width": 1000,
       "height": 1500
     },
     {
       "file": "05-height.webp",
+      "raw_source": "assets/generated/05-height-raw.png",
+      "prompt_block": "Block 05 Height",
       "width": 1000,
       "height": 1500
     },
     {
       "file": "06-structure.webp",
+      "raw_source": "assets/generated/06-structure-raw.png",
+      "prompt_block": "Block 06 Structure",
       "width": 1000,
       "height": 1500
     },
     {
       "file": "07-authority.webp",
+      "raw_source": "assets/generated/07-authority-raw.png",
+      "prompt_block": "Block 07 Authority",
       "width": 1000,
       "height": 1500
     },
     {
       "file": "08-guide.webp",
+      "raw_source": "assets/generated/08-guide-raw.png",
+      "prompt_block": "Block 08 Guide",
       "width": 1000,
       "height": 1500
     },
     {
       "file": "09-persona.webp",
+      "raw_source": "assets/generated/09-persona-raw.png",
+      "prompt_block": "Block 09 Persona",
       "width": 1000,
       "height": 1500
     },
     {
       "file": "10-final.webp",
+      "raw_source": "assets/generated/10-final-raw.png",
+      "prompt_block": "Block 10 Final",
       "width": 1000,
       "height": 1500
     }

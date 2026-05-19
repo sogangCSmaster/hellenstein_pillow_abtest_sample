@@ -3,7 +3,7 @@
   "use strict";
 
   var PRODUCT_NO = "8461";
-  var TAG_VERSION = "2026-05-19.detail-color-overlay";
+  var TAG_VERSION = "2026-05-20.image-rework";
   var RAW_ASSET_BASE =
     "https://raw.githubusercontent.com/sogangCSmaster/hellenstein_pillow_abtest_sample/main/proposal/";
   var RAW_ORIGINAL_ASSET_BASE =
@@ -87,7 +87,7 @@
   }
 
   function asset(file) {
-    return ASSET_BASE + file;
+    return ASSET_BASE + file + "?v=" + encodeURIComponent(TAG_VERSION);
   }
 
   function originalAsset(file) {

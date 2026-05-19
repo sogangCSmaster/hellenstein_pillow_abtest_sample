@@ -25,7 +25,7 @@ https://hellenstein.co.kr/product/detail.html?product_no=8461&cate_no=906&displa
 ## Folder Structure
 
 - `original/`: 현재 상세페이지 본문 이미지 36개를 실제 페이지에서 순서대로 다운로드한 원본 백업
-- `assets/generated/`: imagegen으로 만든 라이프스타일 원본 컷
+- `assets/generated/`: imagegen으로 만든 10개 무문자 raw 컷과 `raw-contact-sheet.png`
 - `proposal/`: GTM에서 사용할 WebP 배포용 이미지 컷과 `manifest.json`
 - `docs/pptx-strategy.md`: PPTX 12블록을 실제 PDP 구조로 재해석한 기준 문서
 - `scripts/build-proposal-assets.js`: 원본/생성 이미지를 조합해 배포용 컷과 컨택트시트를 만드는 빌드 스크립트
@@ -36,7 +36,8 @@ https://hellenstein.co.kr/product/detail.html?product_no=8461&cate_no=906&displa
 
 ## Asset Build
 
-이미지 컷은 클릭 요소를 포함하지 않습니다. 텍스트가 필요한 경우에도 고객에게 보이는 정확한 카피만 빌드 스크립트에서 렌더링합니다.
+이미지 컷은 클릭 요소, 로고, 인증마크, UI를 포함하지 않습니다. raw 컷에는 문자를 넣지 않고,
+고객에게 보이는 정확한 카피만 빌드 스크립트에서 Pretendard로 합성합니다.
 
 ```bash
 NODE_PATH=/Users/yuseungjae/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules \
