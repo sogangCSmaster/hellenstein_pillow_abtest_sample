@@ -1,351 +1,859 @@
-<!--
-  GTM Custom HTML Tag
-  Hellenstein "내 목의 베개" PDP proposal demo
-
-  Trigger condition:
-  - Page URL contains product_no=8461
-  - Page URL contains abtest=true
-
-  URL modes:
-  - ?product_no=8461&cate_no=906&display_group=1&abtest=true&detail=false
-    Shows the proposed landing page only.
-  - ?product_no=8461&cate_no=906&display_group=1&abtest=true&detail=true
-    Shows the proposed landing page plus rationale panels based on the PPTX.
-
-  The image files are static PDP cuts only. Clickable CTA behavior is inserted
-  by this tag as HTML so it remains trackable and editable in GTM.
--->
 <script>
 (function () {
   "use strict";
 
-  var TARGET_PRODUCT_NO = "8461";
-  var ASSET_BASE =
+  var PRODUCT_NO = "8461";
+  var TAG_VERSION = "2026-05-19.rebuild";
+  var RAW_ASSET_BASE =
     "https://raw.githubusercontent.com/sogangCSmaster/hellenstein_pillow_abtest_sample/main/proposal/";
-  var ASSET_VERSION = "20260519-imagegen-v1";
-
+  var ASSET_BASE = (
+    window.__HST_ASSET_BASE__ || RAW_ASSET_BASE
+  ).replace(/\/?$/, "/");
   var params = new URLSearchParams(window.location.search);
-  var isTargetPage =
-    window.location.pathname.indexOf("/product/detail.html") !== -1 &&
-    params.get("product_no") === TARGET_PRODUCT_NO;
-  var isEnabled = params.get("abtest") === "true";
+  var isTargetProduct = params.get("product_no") === PRODUCT_NO;
+  var isExperiment = params.get("abtest") === "true";
   var isDetailMode = params.get("detail") === "true";
 
-  if (!isTargetPage || !isEnabled) {
-    return;
+  if (!isExperiment || !isTargetProduct) return;
+  if (window.__HST_PILLOW_ABTEST_RENDERED__) return;
+  window.__HST_PILLOW_ABTEST_RENDERED__ = true;
+
+  var detailMeta = {
+    hero: {
+      slide: "PPT slide 8, 11",
+      block: "Block 01 · Hero",
+      why: "첫 화면 8초 안에 제품명, 핵심 편익, 4단계 높이 조절, 후기 근거를 함께 보이게 합니다.",
+    },
+    problem: {
+      slide: "PPT slide 8",
+      block: "Block 02 · Problem",
+      why: "솔루션보다 먼저 '왜 베개가 아침 컨디션을 바꾸는가'를 자기 문제로 인식시킵니다.",
+    },
+    agitation: {
+      slide: "PPT slide 8",
+      block: "Block 03 · Agitation",
+      why: "베개 선택을 하루짜리 불편이 아니라 365번 반복되는 아침의 문제로 프레이밍합니다.",
+    },
+    solution: {
+      slide: "PPT slide 8",
+      block: "Block 04 · Solution",
+      why: "기존 6개 셀링포인트를 높이, 구조, 소재의 3개 기억 단위로 줄입니다.",
+    },
+    social: {
+      slide: "PPT slide 9",
+      block: "Block 05 · Social Proof Top",
+      why: "페이지 하단에 묻힌 실제 리뷰를 의사결정 초반으로 끌어올려 신뢰를 먼저 만듭니다.",
+    },
+    height: {
+      slide: "PPT slide 9",
+      block: "Block 06 · FAB Deep Dive",
+      why: "기능 설명을 체형과 수면 자세에 맞춘 고객 체감 편익으로 번역합니다.",
+    },
+    structure: {
+      slide: "PPT slide 9",
+      block: "Block 06 · FAB Deep Dive",
+      why: "4분할 구조를 목, 머리, 어깨, 옆잠 지지라는 사용 장면으로 이해시킵니다.",
+    },
+    comparison: {
+      slide: "PPT slide 9",
+      block: "Block 07 · Comparison",
+      why: "고가 상품의 비교 탐색을 페이지 밖으로 보내지 않고 내부에서 정리합니다.",
+    },
+    persona: {
+      slide: "PPT slide 9",
+      block: "Block 08 · Who Is This For",
+      why: "사무직, 옆잠, 베개 교체, 부모님 선물처럼 스스로를 대입할 수 있는 구매 맥락을 만듭니다.",
+    },
+    risk: {
+      slide: "PPT slide 10",
+      block: "Block 09 · Risk Reversal",
+      why: "확정 전 혜택은 단정하지 않고, 적응 기간 안내와 정책 설계 필요성을 분리합니다.",
+    },
+    authority: {
+      slide: "PPT slide 10",
+      block: "Block 10 · Authority Stack",
+      why: "FITI, 소재 안전성, 내구성 검증을 묶어 신뢰 신호를 한 번에 확인하게 합니다.",
+    },
+    guide: {
+      slide: "PPT slide 10",
+      block: "Block 11 · FAQ 보완",
+      why: "구매 후 사용법 불안을 줄이기 위해 조절, 관리, 스펙 정보를 하단에 다시 묶습니다.",
+    },
+    faq: {
+      slide: "PPT slide 10",
+      block: "Block 11 · FAQ",
+      why: "가격, 적응, 옆잠, 세탁, 선물 같은 마지막 망설임을 구매 직전에 처리합니다.",
+    },
+    final: {
+      slide: "PPT slide 10, 15",
+      block: "Block 12 · Final CTA + UGC",
+      why: "긴 페이지를 끝까지 본 사용자가 다시 옵션 영역으로 돌아갈 수 있게 마무리 기억을 만듭니다.",
+    },
+  };
+
+  function pushEvent(eventName, payload) {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push(
+      Object.assign(
+        {
+          event: eventName,
+          product_no: PRODUCT_NO,
+          detail_mode: isDetailMode,
+          asset_version: TAG_VERSION,
+        },
+        payload || {},
+      ),
+    );
   }
 
-  var blocks = [
-    {
-      file: "01-hero.webp",
-      title: "01 Hero",
-      alt: "내 목의 베개 제안 랜딩 Hero: 매일 아침 목이 다르다",
-      reason:
-        "첫 화면에서 제품명, 핵심 가치, 후기 신뢰, 3개 핵심 근거를 한 번에 보여줍니다. 클릭 CTA는 이미지가 아니라 하단 Sticky HTML로 분리했습니다.",
-      source: "PPT 5, 8, 11"
-    },
-    {
-      file: "02-problem.webp",
-      title: "02 Problem",
-      alt: "내 목의 베개 제안 랜딩 Problem: 왜 매일 아침 목이 무거울까",
-      reason:
-        "고관여 상품은 기능 설명보다 자기 문제 인식이 먼저입니다. PAS 구조의 Problem 단계로 페이지 초반을 재정렬했습니다.",
-      source: "PPT 6, 8"
-    },
-    {
-      file: "03-agitation.webp",
-      title: "03 Agitation",
-      alt: "내 목의 베개 제안 랜딩 Agitation: 베개 하나는 365번의 아침",
-      reason:
-        "잘못 맞는 베개를 하루 더 쓰는 일이 누적 손실이라는 점을 보여줘 해결 필요성을 키웁니다.",
-      source: "PPT 6, 8"
-    },
-    {
-      file: "04-solution.webp",
-      title: "04 Solution",
-      alt: "내 목의 베개 제안 랜딩 Solution: 5년간 다시 만든 이유",
-      reason:
-        "현재 페이지의 여러 장점을 모두 평등하게 나열하지 않고 높이, 구조, 소재 3개 축으로 기억 부담을 줄였습니다.",
-      source: "PPT 4, 5, 8"
-    },
-    {
-      file: "05-social-proof.webp",
-      title: "05 Social Proof",
-      alt: "내 목의 베개 제안 랜딩 Social Proof: 구매 전 후기를 먼저 확인",
-      reason:
-        "하단에 묻힌 후기 자산을 상단으로 당겨 가격 장벽 전에 신뢰를 형성합니다. 실제 리뷰 노출은 별도 HTML 리뷰 모듈도 함께 삽입합니다.",
-      source: "PPT 5, 9"
-    },
-    {
-      file: "06-fab-height.webp",
-      title: "06 FAB Height",
-      alt: "내 목의 베개 제안 랜딩 FAB: 낮은 베개부터 높은 베개까지 4단계",
-      reason:
-        "Feature, Advantage, Benefit 흐름으로 4단계 높이 조절이 사용자의 체감 이익으로 이어지게 설명합니다.",
-      source: "PPT 6, 9"
-    },
-    {
-      file: "07-fab-structure.webp",
-      title: "07 FAB Structure",
-      alt: "내 목의 베개 제안 랜딩 FAB: 목과 머리를 따로 받치는 4분할 구조",
-      reason:
-        "4분할 구조 인포그래픽을 기능 설명에서 끝내지 않고 압박 분산과 자세별 지지라는 Benefit으로 연결합니다.",
-      source: "PPT 6, 9"
-    },
-    {
-      file: "08-authority.webp",
-      title: "08 Authority Stack",
-      alt: "내 목의 베개 제안 랜딩 Authority: 인증과 테스트를 한 번에 묶기",
-      reason:
-        "FITI, 반복 테스트, 소재 안전성, 내구성 같은 신뢰 요소를 한 구간에 묶어 19만원대 가격의 이유를 설명합니다.",
-      source: "PPT 10"
-    },
-    {
-      file: "09-comparison.webp",
-      title: "09 Comparison",
-      alt: "내 목의 베개 제안 랜딩 Comparison: 비교를 위해 페이지를 떠나지 않게 하기",
-      reason:
-        "고가 상품에서 발생하는 비교 검색 이탈을 줄이기 위해 일반 베개, 일반 경추 베개, 내 목의 베개 차이를 페이지 안에서 정리합니다.",
-      source: "PPT 5, 9"
-    },
-    {
-      file: "10-who-for.webp",
-      title: "10 Who Is This For",
-      alt: "내 목의 베개 제안 랜딩 Who Is This For: 이런 분께 추천합니다",
-      reason:
-        "사무직, 옆잠, 베개 교체 경험자, 부모님 선물 등 자기 동일시 페르소나를 넣어 구매 맥락을 넓힙니다.",
-      source: "PPT 9"
-    },
-    {
-      file: "11-risk-reversal.webp",
-      title: "11 Risk Reversal",
-      alt: "내 목의 베개 제안 랜딩 Risk Reversal: 처음 2주는 적응 기간",
-      reason:
-        "경추 베개 적응 기간을 미리 안내하고 보장 정책 제안을 보여줘 구매 전 불안과 구매 후 반품 사유를 함께 줄이는 구간입니다.",
-      source: "PPT 5, 10, 12"
-    },
-    {
-      file: "12-faq.webp",
-      title: "12 FAQ",
-      alt: "내 목의 베개 제안 랜딩 FAQ: 마지막 망설임을 정면으로 다루기",
-      reason:
-        "가격, 옆잠, 적응, 세탁, 선물 같은 구매 직전 반론을 하단에서 정면으로 처리합니다.",
-      source: "PPT 10"
-    },
-    {
-      file: "13-final.webp",
-      title: "13 Final Visual",
-      alt: "내 목의 베개 제안 랜딩 Final: 오늘 밤의 베개가 내일 아침을 바꿉니다",
-      reason:
-        "마지막 감성 컷으로 제품 기억을 남기고, 실제 구매 행동은 이미지가 아닌 Sticky HTML CTA가 담당합니다.",
-      source: "PPT 10, 15"
-    }
-  ];
-
-  function assetUrl(file) {
-    return ASSET_BASE + file + "?v=" + encodeURIComponent(ASSET_VERSION);
+  function asset(file) {
+    return ASSET_BASE + file;
   }
 
   function escapeHtml(value) {
-    return String(value)
+    return String(value || "")
       .replace(/&/g, "&amp;")
       .replace(/</g, "&lt;")
       .replace(/>/g, "&gt;")
       .replace(/"/g, "&quot;");
   }
 
-  function installStyles() {
-    if (document.getElementById("hst-abtest-style")) {
-      return;
-    }
+  function normalizeText(value) {
+    return String(value || "").replace(/\s+/g, " ").trim();
+  }
 
+  function truncate(value, max) {
+    var text = normalizeText(value);
+    if (text.length <= max) return text;
+    return text.slice(0, max - 1).trim() + "…";
+  }
+
+  function createElement(html) {
+    var template = document.createElement("template");
+    template.innerHTML = html.trim();
+    return template.content.firstElementChild;
+  }
+
+  function injectStyle() {
+    if (document.getElementById("hst-pillow-abtest-style")) return;
     var style = document.createElement("style");
-    style.id = "hst-abtest-style";
-    style.textContent = [
-      "#prdDetail .prdimages .hst-abtest-wrap{max-width:1000px;margin:0 auto;background:#fbfaf7;font-family:Apple SD Gothic Neo,Pretendard,Noto Sans KR,sans-serif;color:#1f2421;}",
-      "#prdDetail .prdimages .hst-abtest-block{margin:0;padding:0;}",
-      "#prdDetail .prdimages .hst-abtest-img{display:block;width:100%;max-width:1000px;height:auto;margin:0 auto;border:0;}",
-      "#prdDetail .prdimages .hst-abtest-review{box-sizing:border-box;margin:0 auto;padding:44px 42px;background:#fffaf3;border-top:1px solid #e5ded2;border-bottom:1px solid #e5ded2;}",
-      "#prdDetail .prdimages .hst-abtest-review-head{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;margin-bottom:24px;}",
-      "#prdDetail .prdimages .hst-abtest-review-title{margin:0;font-size:32px;line-height:1.28;font-weight:800;color:#1f2421;letter-spacing:0;}",
-      "#prdDetail .prdimages .hst-abtest-review-score{flex:0 0 auto;text-align:right;font-size:18px;font-weight:800;color:#9a735f;}",
-      "#prdDetail .prdimages .hst-abtest-review-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}",
-      "#prdDetail .prdimages .hst-abtest-review-card{box-sizing:border-box;min-height:148px;padding:22px 20px;border:1px solid #e3dacd;border-radius:14px;background:#fff;}",
-      "#prdDetail .prdimages .hst-abtest-review-card strong{display:block;margin-bottom:12px;font-size:16px;line-height:1.35;color:#3d4d43;}",
-      "#prdDetail .prdimages .hst-abtest-review-card p{margin:0;font-size:15px;line-height:1.55;color:#5e635c;word-break:keep-all;}",
-      "#prdDetail .prdimages .hst-abtest-explain{box-sizing:border-box;margin:0 auto;padding:28px 34px 34px;background:#ffffff;border-top:1px solid #e4ddd2;border-bottom:1px solid #e4ddd2;}",
-      "#prdDetail .prdimages .hst-abtest-explain-kicker{display:inline-flex;align-items:center;margin-bottom:12px;padding:7px 12px;border-radius:999px;background:#3d4d43;color:#fff;font-size:13px;font-weight:800;letter-spacing:.02em;}",
-      "#prdDetail .prdimages .hst-abtest-explain-title{margin:0 0 10px;font-size:24px;line-height:1.35;font-weight:800;color:#1f2421;}",
-      "#prdDetail .prdimages .hst-abtest-explain-body{margin:0;font-size:17px;line-height:1.65;font-weight:500;color:#60665f;word-break:keep-all;}",
-      "#prdDetail .prdimages .hst-abtest-explain-source{margin-top:12px;font-size:13px;line-height:1.4;color:#9a735f;font-weight:700;}",
-      ".hst-abtest-top-proof{box-sizing:border-box;margin:18px 0 0;padding:18px;border:1px solid #e2d8ca;border-radius:16px;background:#fbfaf7;font-family:Apple SD Gothic Neo,Pretendard,Noto Sans KR,sans-serif;color:#1f2421;}",
-      ".hst-abtest-top-proof strong{display:block;margin-bottom:8px;font-size:16px;line-height:1.35;font-weight:800;color:#1f2421;}",
-      ".hst-abtest-top-proof p{margin:0 0 12px;font-size:13px;line-height:1.55;color:#5d645d;word-break:keep-all;}",
-      ".hst-abtest-top-proof ul{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:0;padding:0;list-style:none;}",
-      ".hst-abtest-top-proof li{padding:10px 8px;border-radius:10px;background:#fff;border:1px solid #e6ddd1;text-align:center;font-size:12px;line-height:1.3;font-weight:700;color:#3d4d43;}",
-      ".hst-abtest-sticky{position:fixed;left:50%;bottom:18px;z-index:2147483000;display:flex;align-items:center;justify-content:space-between;gap:18px;box-sizing:border-box;width:min(720px,calc(100% - 28px));padding:14px 16px 14px 20px;transform:translateX(-50%);border:1px solid rgba(31,36,33,.12);border-radius:999px;background:rgba(255,255,255,.96);box-shadow:0 14px 40px rgba(0,0,0,.18);backdrop-filter:blur(8px);font-family:Apple SD Gothic Neo,Pretendard,Noto Sans KR,sans-serif;}",
-      ".hst-abtest-sticky strong{display:block;font-size:17px;line-height:1.25;color:#1f2421;}",
-      ".hst-abtest-sticky span{display:block;margin-top:3px;font-size:13px;line-height:1.3;color:#666;}",
-      ".hst-abtest-sticky button{flex:0 0 auto;border:0;border-radius:999px;background:#1f2421;color:#fff;padding:13px 20px;font-size:15px;font-weight:800;cursor:pointer;}",
-      "@media (max-width:720px){#prdDetail .prdimages .hst-abtest-review{padding:30px 20px}#prdDetail .prdimages .hst-abtest-review-head{display:block}#prdDetail .prdimages .hst-abtest-review-title{font-size:25px}#prdDetail .prdimages .hst-abtest-review-score{text-align:left;margin-top:10px}#prdDetail .prdimages .hst-abtest-review-grid{grid-template-columns:1fr}#prdDetail .prdimages .hst-abtest-explain{padding:22px 20px 26px}.hst-abtest-top-proof ul{grid-template-columns:1fr}.hst-abtest-sticky{bottom:12px;border-radius:18px;align-items:flex-start}.hst-abtest-sticky strong{font-size:15px}.hst-abtest-sticky button{padding:12px 16px;font-size:14px}}"
-    ].join("");
+    style.id = "hst-pillow-abtest-style";
+    style.textContent = `
+      .hst-pdp, .hst-pdp * { box-sizing: border-box; }
+      .hst-pdp {
+        width: 100%;
+        max-width: 1000px;
+        margin: 0 auto;
+        font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard", "Noto Sans KR", sans-serif;
+        color: #24211e;
+        background: #fffdf9;
+      }
+      .hst-block {
+        position: relative;
+        width: 100%;
+        margin: 0 auto;
+        background: #fffdf9;
+      }
+      .hst-image-block img {
+        display: block;
+        width: 100%;
+        height: auto;
+        margin: 0 auto;
+        border: 0;
+      }
+      .hst-html-block {
+        padding: 72px 56px;
+        border-top: 1px solid #ede3d7;
+      }
+      .hst-eyebrow {
+        display: inline-flex;
+        align-items: center;
+        height: 30px;
+        padding: 0 13px;
+        border-radius: 999px;
+        background: #3d4d43;
+        color: #fff;
+        font-size: 13px;
+        font-weight: 800;
+        letter-spacing: 0;
+      }
+      .hst-html-block h2 {
+        margin: 22px 0 16px;
+        font-size: 40px;
+        line-height: 1.18;
+        font-weight: 850;
+        letter-spacing: 0;
+        color: #1f2421;
+      }
+      .hst-html-block p {
+        margin: 0;
+        font-size: 18px;
+        line-height: 1.72;
+        color: #62675f;
+        letter-spacing: 0;
+      }
+      .hst-proof-stats,
+      .hst-faq-list,
+      .hst-review-grid,
+      .hst-persona-grid,
+      .hst-comparison-table,
+      .hst-risk-grid {
+        margin-top: 34px;
+      }
+      .hst-proof-stats {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+      }
+      .hst-stat {
+        padding: 22px 20px;
+        border: 1px solid #e4dbcf;
+        border-radius: 8px;
+        background: #fff;
+      }
+      .hst-stat strong {
+        display: block;
+        font-size: 28px;
+        line-height: 1.1;
+        color: #3d4d43;
+      }
+      .hst-stat span {
+        display: block;
+        margin-top: 8px;
+        font-size: 14px;
+        line-height: 1.45;
+        color: #6f706b;
+      }
+      .hst-review-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+      }
+      .hst-review-card {
+        min-height: 230px;
+        padding: 22px 20px;
+        border: 1px solid #e5ddd2;
+        border-radius: 8px;
+        background: #fff;
+      }
+      .hst-stars {
+        color: #a17b3d;
+        font-size: 16px;
+        font-weight: 850;
+      }
+      .hst-review-card blockquote {
+        margin: 14px 0 16px;
+        font-size: 15px;
+        line-height: 1.62;
+        color: #32342f;
+      }
+      .hst-review-card footer {
+        font-size: 13px;
+        color: #7b7a73;
+      }
+      .hst-action-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: center;
+        margin-top: 30px;
+      }
+      .hst-button {
+        appearance: none;
+        border: 1px solid #3d4d43;
+        border-radius: 4px;
+        background: #3d4d43;
+        color: #fff;
+        min-height: 46px;
+        padding: 0 18px;
+        font-size: 15px;
+        font-weight: 800;
+        cursor: pointer;
+      }
+      .hst-button.secondary {
+        background: #fff;
+        color: #3d4d43;
+      }
+      .hst-comparison-wrap {
+        overflow-x: auto;
+        border: 1px solid #e2d9ce;
+        border-radius: 8px;
+        background: #fff;
+      }
+      .hst-comparison-table {
+        width: 100%;
+        min-width: 720px;
+        border-collapse: collapse;
+        margin: 0;
+        font-size: 15px;
+      }
+      .hst-comparison-table th,
+      .hst-comparison-table td {
+        padding: 18px 16px;
+        border-bottom: 1px solid #ebe3d9;
+        text-align: left;
+        vertical-align: top;
+        line-height: 1.55;
+      }
+      .hst-comparison-table th {
+        background: #f7f2ea;
+        color: #3d4d43;
+        font-weight: 850;
+      }
+      .hst-comparison-table tr:last-child td {
+        border-bottom: 0;
+      }
+      .hst-comparison-table td:first-child {
+        width: 18%;
+        font-weight: 850;
+        color: #24211e;
+      }
+      .hst-comparison-table td:nth-child(2) {
+        background: #fffaf3;
+        color: #20231f;
+        font-weight: 720;
+      }
+      .hst-risk-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+      }
+      .hst-risk-card,
+      .hst-faq-item {
+        border: 1px solid #e3dacd;
+        border-radius: 8px;
+        background: #fff;
+      }
+      .hst-risk-card {
+        padding: 22px 20px;
+      }
+      .hst-risk-card strong {
+        display: block;
+        margin-bottom: 10px;
+        color: #3d4d43;
+        font-size: 18px;
+      }
+      .hst-faq-list {
+        display: grid;
+        gap: 10px;
+      }
+      .hst-faq-item {
+        padding: 22px 24px;
+      }
+      .hst-faq-item strong {
+        display: block;
+        margin-bottom: 10px;
+        font-size: 18px;
+        color: #24211e;
+      }
+      .hst-faq-item p {
+        font-size: 15px;
+        line-height: 1.65;
+      }
+      .hst-top-proof {
+        clear: both;
+        margin: 18px 0 24px;
+        padding: 18px 18px 16px;
+        border: 1px solid #e5ddd2;
+        border-radius: 8px;
+        background: #fffaf3;
+        font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard", "Noto Sans KR", sans-serif;
+      }
+      .hst-top-proof strong {
+        display: block;
+        font-size: 18px;
+        line-height: 1.35;
+        color: #24211e;
+      }
+      .hst-top-proof p {
+        margin: 7px 0 0;
+        font-size: 13px;
+        line-height: 1.55;
+        color: #68645d;
+      }
+      .hst-top-proof button {
+        margin-top: 12px;
+        height: 36px;
+        padding: 0 13px;
+        border: 1px solid #3d4d43;
+        border-radius: 4px;
+        background: #3d4d43;
+        color: #fff;
+        font-size: 13px;
+        font-weight: 800;
+        cursor: pointer;
+      }
+      .hst-sticky-cta {
+        position: fixed;
+        z-index: 2147483000;
+        right: 24px;
+        bottom: 24px;
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        padding: 10px;
+        border: 1px solid rgba(61, 77, 67, .18);
+        border-radius: 8px;
+        background: rgba(255, 253, 249, .96);
+        box-shadow: 0 12px 32px rgba(0, 0, 0, .16);
+        backdrop-filter: blur(10px);
+      }
+      .hst-sticky-cta button {
+        height: 42px;
+        border-radius: 4px;
+        border: 1px solid #3d4d43;
+        padding: 0 14px;
+        font-size: 14px;
+        font-weight: 850;
+        cursor: pointer;
+      }
+      .hst-sticky-cta .primary {
+        background: #3d4d43;
+        color: #fff;
+      }
+      .hst-sticky-cta .secondary {
+        background: #fff;
+        color: #3d4d43;
+      }
+      .hst-detail-highlight {
+        outline: 3px solid rgba(239, 68, 68, .9);
+        outline-offset: -3px;
+      }
+      .hst-detail-highlight::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background: rgba(255, 214, 102, .18);
+        z-index: 4;
+      }
+      .hst-detail-badge {
+        position: absolute;
+        z-index: 5;
+        top: 18px;
+        left: 18px;
+        max-width: min(430px, calc(100% - 36px));
+        padding: 14px 15px 13px;
+        border: 2px solid #ef4444;
+        border-radius: 8px;
+        background: rgba(255, 255, 255, .94);
+        color: #1f2421;
+        box-shadow: 0 12px 30px rgba(31, 36, 33, .18);
+        text-align: left;
+      }
+      .hst-detail-badge strong {
+        display: block;
+        font-size: 14px;
+        line-height: 1.35;
+        color: #b42318;
+      }
+      .hst-detail-badge span {
+        display: block;
+        margin-top: 4px;
+        font-size: 13px;
+        line-height: 1.45;
+        color: #544c43;
+      }
+      @media (max-width: 767px) {
+        html.hst-pillow-abtest-active,
+        html.hst-pillow-abtest-active body {
+          width: 100% !important;
+          max-width: 100% !important;
+          margin-left: 0 !important;
+          margin-right: 0 !important;
+          overflow-x: hidden !important;
+        }
+        html.hst-pillow-abtest-active #wrap,
+        html.hst-pillow-abtest-active #container,
+        html.hst-pillow-abtest-active #contentsWrap,
+        html.hst-pillow-abtest-active #contents-detail,
+        html.hst-pillow-abtest-active .detailArea,
+        html.hst-pillow-abtest-active .detail-left,
+        html.hst-pillow-abtest-active .detail-right,
+        html.hst-pillow-abtest-active .productDetail,
+        html.hst-pillow-abtest-active .prdimages,
+        html.hst-pillow-abtest-active .hst-pdp {
+          width: 100% !important;
+          max-width: 100% !important;
+          min-width: 0 !important;
+          margin-left: 0 !important;
+          margin-right: 0 !important;
+          float: none !important;
+        }
+        .hst-html-block {
+          padding: 48px 20px;
+        }
+        .hst-html-block h2 {
+          font-size: 29px;
+          line-height: 1.22;
+        }
+        .hst-html-block p {
+          font-size: 15px;
+          line-height: 1.72;
+        }
+        .hst-proof-stats,
+        .hst-review-grid,
+        .hst-risk-grid {
+          grid-template-columns: 1fr;
+        }
+        .hst-sticky-cta {
+          left: 12px;
+          right: 12px;
+          bottom: 78px;
+          justify-content: stretch;
+        }
+        .hst-sticky-cta button {
+          flex: 1 1 0;
+          padding: 0 10px;
+        }
+        .hst-detail-badge {
+          position: relative;
+          top: auto;
+          left: auto;
+          max-width: none;
+          margin: 0;
+          border-radius: 0;
+          border-left: 3px solid #ef4444;
+          border-right: 3px solid #ef4444;
+        }
+      }
+    `;
     document.head.appendChild(style);
   }
 
-  function renderReviewModule() {
-    return [
-      '<section class="hst-abtest-review" aria-label="내 목의 베개 리뷰 요약">',
-      '<div class="hst-abtest-review-head">',
-      '<h3 class="hst-abtest-review-title">후기를 상세페이지 상단에서 먼저 확인하게 합니다.</h3>',
-      '<div class="hst-abtest-review-score">★★★★★ 5.0<br>후기 144개</div>',
-      "</div>",
-      '<div class="hst-abtest-review-grid">',
-      '<article class="hst-abtest-review-card"><strong>아침 목 부담</strong><p>“아침에 목 부담이 줄었다”는 유형의 후기를 상단에 노출해 문제 인식 직후 신뢰를 만듭니다.</p></article>',
-      '<article class="hst-abtest-review-card"><strong>높이 조절 체감</strong><p>4단계 높이 조절이 실제로 어떤 상황에서 도움이 되는지 리뷰 문맥으로 보여줍니다.</p></article>',
-      '<article class="hst-abtest-review-card"><strong>선물 수요</strong><p>부모님 선물처럼 19만원대 가격을 설명할 수 있는 구매 맥락을 별도로 확보합니다.</p></article>',
-      "</div>",
+  function detailBadge(meta) {
+    if (!isDetailMode || !meta) return "";
+    return (
+      '<div class="hst-detail-badge" aria-label="PPTX 변경 설명">' +
+      "<strong>" +
+      escapeHtml(meta.slide) +
+      " · " +
+      escapeHtml(meta.block) +
+      "</strong>" +
+      "<span>" +
+      escapeHtml(meta.why) +
+      "</span>" +
+      "</div>"
+    );
+  }
+
+  function imageBlock(id, file, alt, meta) {
+    return (
+      '<section class="hst-block hst-image-block' +
+      (isDetailMode ? " hst-detail-highlight" : "") +
+      '" data-hst-block="' +
+      id +
+      '">' +
+      detailBadge(meta) +
+      '<img src="' +
+      asset(file) +
+      '" width="1000" height="1500" loading="eager" decoding="async" alt="' +
+      escapeHtml(alt) +
+      '">' +
       "</section>"
-    ].join("");
+    );
   }
 
-  function renderDetailImages(container) {
-    var html = '<div class="hst-abtest-wrap" data-hst-abtest-detail="' + String(isDetailMode) + '">';
-
-    blocks.forEach(function (block, index) {
-      html += '<section class="hst-abtest-block" data-hst-block="' + escapeHtml(block.title) + '">';
-      html +=
-        '<img class="hst-abtest-img" src="' +
-        escapeHtml(assetUrl(block.file)) +
-        '" alt="' +
-        escapeHtml(block.alt) +
-        '" width="1000" loading="' +
-        (index < 2 ? "eager" : "lazy") +
-        '" decoding="async">';
-
-      if (isDetailMode) {
-        html += '<div class="hst-abtest-explain">';
-        html += '<div class="hst-abtest-explain-kicker">WHY THIS BLOCK</div>';
-        html += '<h3 class="hst-abtest-explain-title">' + escapeHtml(block.title) + '</h3>';
-        html += '<p class="hst-abtest-explain-body">' + escapeHtml(block.reason) + '</p>';
-        html += '<div class="hst-abtest-explain-source">' + escapeHtml(block.source) + '</div>';
-        html += '</div>';
-      }
-
-      html += "</section>";
-
-      if (index === 0) {
-        html += renderReviewModule();
-      }
-    });
-
-    html += "</div>";
-    container.innerHTML = html;
-    container.setAttribute("data-hst-abtest-rendered", "true");
+  function htmlBlock(id, html, meta) {
+    return (
+      '<section class="hst-block hst-html-block' +
+      (isDetailMode ? " hst-detail-highlight" : "") +
+      '" data-hst-block="' +
+      id +
+      '">' +
+      detailBadge(meta) +
+      html +
+      "</section>"
+    );
   }
 
-  function mountTopProof() {
-    if (document.querySelector(".hst-abtest-top-proof")) {
-      return;
-    }
-
-    var infoBox = document.querySelector(".infoArea .infoAreabox");
-    if (!infoBox || !infoBox.parentNode) {
-      return;
-    }
-
-    var proof = document.createElement("div");
-    proof.className = "hst-abtest-top-proof";
-    proof.innerHTML = [
-      "<strong>★★★★★ 5.0 · 후기 144개</strong>",
-      "<p>상세 이미지까지 내려가기 전에 가격, 신뢰, 핵심 차별점을 먼저 확인하게 합니다.</p>",
-      "<ul>",
-      "<li>4단계<br>높이 조절</li>",
-      "<li>4분할<br>지지 구조</li>",
-      "<li>FITI<br>인증 소재</li>",
-      "</ul>"
-    ].join("");
-
-    infoBox.parentNode.insertBefore(proof, infoBox.nextSibling);
+  function collectReviews() {
+    var rows = Array.prototype.slice.call(
+      document.querySelectorAll("#prdReview .detailreview_listtype.xans-record-"),
+    );
+    return rows
+      .map(function (row) {
+        return {
+          title: normalizeText(
+            row.querySelector(".review_title") &&
+              row.querySelector(".review_title").textContent,
+          ),
+          content: normalizeText(
+            row.querySelector(".review_content") &&
+              row.querySelector(".review_content").textContent,
+          ),
+          writer: normalizeText(
+            row.querySelector(".review_writer") &&
+              row.querySelector(".review_writer").textContent,
+          ),
+          date: normalizeText(
+            row.querySelector(".review_date") &&
+              row.querySelector(".review_date").textContent,
+          ),
+        };
+      })
+      .filter(function (review) {
+        return review.title || review.content;
+      })
+      .slice(0, 3);
   }
 
-  function mountStickyCta() {
-    if (document.querySelector(".hst-abtest-sticky")) {
-      return;
+  function reviewCards(reviews) {
+    if (!reviews.length) {
+      return (
+        '<div class="hst-review-card">' +
+        '<div class="hst-stars">★★★★★</div>' +
+        "<blockquote>현재 페이지의 실제 리뷰 영역에서 후기를 불러오는 중입니다.</blockquote>" +
+        "<footer>실제 리뷰 목록이 로드되면 이 영역에 표시됩니다.</footer>" +
+        "</div>"
+      );
     }
+    return reviews
+      .map(function (review) {
+        var body = review.content || review.title;
+        return (
+          '<article class="hst-review-card">' +
+          '<div class="hst-stars">★★★★★</div>' +
+          "<blockquote>" +
+          escapeHtml(truncate(body, 112)) +
+          "</blockquote>" +
+          "<footer>" +
+          escapeHtml(review.writer || "구매 고객") +
+          (review.date ? " · " + escapeHtml(review.date) : "") +
+          "</footer>" +
+          "</article>"
+        );
+      })
+      .join("");
+  }
 
-    var sticky = document.createElement("div");
-    sticky.className = "hst-abtest-sticky";
-    sticky.innerHTML =
-      '<div><strong>내 목의 베개 · AB 테스트 시안</strong><span>191,700원 · 후기 144개 · 4단계 높이 조절</span></div><button type="button">구매 영역 보기</button>';
+  function socialProofBlock() {
+    var reviews = collectReviews();
+    return htmlBlock(
+      "social-proof",
+      `
+        <span class="hst-eyebrow">실제 사용 후기</span>
+        <h2>구매 전, 실제 사용 후기로 먼저 확인하세요</h2>
+        <p>높이 조절, 목 지지, 관리 편의성처럼 실제 구매자가 남긴 만족 포인트를 먼저 확인할 수 있습니다.</p>
+        <div class="hst-proof-stats">
+          <div class="hst-stat"><strong>5.0</strong><span>상품 상세 기준 평균 별점</span></div>
+          <div class="hst-stat"><strong>144개</strong><span>현재 상품 후기 수</span></div>
+          <div class="hst-stat"><strong>29페이지</strong><span>더 확인할 수 있는 후기</span></div>
+        </div>
+        <div class="hst-review-grid">${reviewCards(reviews)}</div>
+        <div class="hst-action-row">
+          <button class="hst-button" type="button" data-hst-review-jump>전체 후기 보기</button>
+        </div>
+      `,
+      detailMeta.social,
+    );
+  }
 
-    sticky.querySelector("button").addEventListener("click", function () {
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({
-        event: "hellenstein_pillow_abtest_cta_click",
-        product_no: TARGET_PRODUCT_NO,
-        detail_mode: isDetailMode ? "true" : "false"
-      });
+  function comparisonBlock() {
+    return htmlBlock(
+      "comparison",
+      `
+        <span class="hst-eyebrow">비교 기준</span>
+        <h2>내 몸에 맞는 기준을 한눈에 비교하세요</h2>
+        <p>가격만 비교하기보다 높이 조절, 지지 구조, 인증, 관리 기준을 함께 보면 내게 맞는 베개인지 더 쉽게 판단할 수 있습니다.</p>
+        <div class="hst-comparison-wrap">
+          <table class="hst-comparison-table" aria-label="내 목의 베개 비교표">
+            <thead>
+              <tr>
+                <th>기준</th>
+                <th>헬렌스타인 내 목의 베개</th>
+                <th>일반 베개</th>
+                <th>일반 경추 베개</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>높이 조절</td>
+                <td>4단계 높이 조절로 체형과 자세에 맞춤</td>
+                <td>고정 높이인 경우가 많아 적응이 필요</td>
+                <td>일부 조절형이지만 구조 설명이 부족한 경우가 많음</td>
+              </tr>
+              <tr>
+                <td>지지 구조</td>
+                <td>목, 머리, 어깨, 옆잠을 나눠 받치는 4분할 구조</td>
+                <td>면 전체로 받치는 단순 구조</td>
+                <td>목 지지 중심으로 장시간 사용감 차이가 생길 수 있음</td>
+              </tr>
+              <tr>
+                <td>신뢰 근거</td>
+                <td>5년 반복 테스트, FITI, 소재 안전성, 내구성 검증</td>
+                <td>제품별 근거 확인이 어려운 경우가 있음</td>
+                <td>인증과 소재 정보가 분산되어 비교가 번거로움</td>
+              </tr>
+              <tr>
+                <td>관리</td>
+                <td>사용 가이드와 케어 가이드를 함께 제공</td>
+                <td>세탁과 관리 기준을 따로 찾아야 함</td>
+                <td>구조가 복잡할수록 관리 기준 확인이 필요</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      `,
+      detailMeta.comparison,
+    );
+  }
 
-      var target =
-        document.querySelector("#orderFixItem") ||
-        document.querySelector(".detail-right") ||
-        document.querySelector(".infoArea");
+  function riskBlock() {
+    return htmlBlock(
+      "risk-reversal",
+      `
+        <span class="hst-eyebrow">처음 2주 안내</span>
+        <h2>처음부터 맞추는 제품이 아니라, 내 몸에 맞게 조절하는 제품입니다</h2>
+        <p>경추 베개는 체형과 수면 자세에 따라 적응감이 달라질 수 있습니다. 그래서 구매 전에는 높이 조절 방법과 적응 기간을 먼저 안내하고, 교환·반품 기준은 공식 정책으로 확인하게 둡니다.</p>
+        <div class="hst-risk-grid">
+          <div class="hst-risk-card"><strong>1단계</strong><p>첫날에는 기본 높이로 사용감을 확인합니다.</p></div>
+          <div class="hst-risk-card"><strong>2단계</strong><p>목과 어깨 부담이 느껴지면 패드로 높이를 조절합니다.</p></div>
+          <div class="hst-risk-card"><strong>3단계</strong><p>적응 기간과 공식 교환·반품 기준을 함께 확인합니다.</p></div>
+        </div>
+      `,
+      detailMeta.risk,
+    );
+  }
 
-      if (target && target.scrollIntoView) {
-        target.scrollIntoView({ behavior: "smooth", block: "center" });
-      }
-    });
+  function faqBlock() {
+    return htmlBlock(
+      "faq",
+      `
+        <span class="hst-eyebrow">FAQ</span>
+        <h2>마지막 망설임을 먼저 답합니다</h2>
+        <div class="hst-faq-list">
+          <div class="hst-faq-item"><strong>왜 일반 베개보다 가격대가 높은가요?</strong><p>4단계 높이 조절, 4분할 지지 구조, 5년 반복 테스트, FITI와 소재 안전성 검증을 한 제품 안에 묶은 고관여 침구이기 때문입니다.</p></div>
+          <div class="hst-faq-item"><strong>처음부터 바로 편해야 하나요?</strong><p>체형과 수면 자세에 따라 적응감이 다를 수 있습니다. 처음에는 기본 높이로 시작하고, 필요하면 패드로 높이를 조절하는 방식이 좋습니다.</p></div>
+          <div class="hst-faq-item"><strong>옆으로 자는 사람도 쓸 수 있나요?</strong><p>목과 머리를 따로 받치는 구조라 옆으로 누웠을 때의 높이 차이를 줄이도록 설계된 제품입니다.</p></div>
+          <div class="hst-faq-item"><strong>세탁과 관리는 어떻게 하나요?</strong><p>상세 하단의 사용 가이드, 케어 가이드, 세탁 안내를 기준으로 관리하면 됩니다. 제품 구조와 커버 관리를 함께 확인하세요.</p></div>
+          <div class="hst-faq-item"><strong>부모님 선물로도 괜찮나요?</strong><p>베개 높이 취향을 정확히 몰라도 조절 가능한 구조라 선물 맥락에서도 설명하기 쉽습니다. 단, 개인 체형과 수면 습관에 맞춘 조절은 필요합니다.</p></div>
+        </div>
+      `,
+      detailMeta.faq,
+    );
+  }
 
+  function buildPdpHtml() {
+    return (
+      '<div class="hst-pdp" id="hst-pillow-pdp">' +
+      imageBlock("hero", "01-hero.webp", "내 목의 베개 핵심 가치와 4단계 높이 조절 베개 소개", detailMeta.hero) +
+      imageBlock("problem", "02-problem.webp", "아침 목과 어깨 부담을 환기하는 문제 제기 컷", detailMeta.problem) +
+      imageBlock("agitation", "03-agitation.webp", "잘 맞지 않는 베개가 반복되는 아침에 미치는 부담 컷", detailMeta.agitation) +
+      imageBlock("solution", "04-solution.webp", "헬렌스타인이 5년간 높이 구조 소재를 다시 설계한 이유", detailMeta.solution) +
+      socialProofBlock() +
+      imageBlock("height", "05-height.webp", "4단계 높이 조절 기능과 고객 체감 이점", detailMeta.height) +
+      imageBlock("structure", "06-structure.webp", "목과 머리를 따로 받치는 4분할 구조", detailMeta.structure) +
+      comparisonBlock() +
+      imageBlock("persona", "09-persona.webp", "내 목의 베개 추천 대상과 선물 맥락", detailMeta.persona) +
+      riskBlock() +
+      imageBlock("authority", "07-authority.webp", "FITI 인증 소재 안전성 내구성 검증", detailMeta.authority) +
+      imageBlock("guide", "08-guide.webp", "사용 가이드 케어 가이드 제품 스펙", detailMeta.guide) +
+      faqBlock() +
+      imageBlock("final", "10-final.webp", "오늘 밤의 베개가 내일 아침을 바꾸는 마무리 컷", detailMeta.final) +
+      "</div>"
+    );
+  }
+
+  function injectTopProof() {
+    var box = document.querySelector(".infoAreabox");
+    if (!box || document.querySelector(".hst-top-proof")) return;
+    var proof = createElement(
+      `
+      <div class="hst-top-proof">
+        <strong>★★★★★ 5.0 · 후기 144개</strong>
+        <p>4단계 높이 조절, 4분할 지지 구조, FITI·소재 안전성 검증까지 구매 전 한 번에 확인하세요.</p>
+        <button type="button" data-hst-review-jump>실제 후기 먼저 보기</button>
+      </div>
+      `,
+    );
+    box.parentNode.insertBefore(proof, box.nextSibling);
+  }
+
+  function injectStickyCta() {
+    if (document.querySelector(".hst-sticky-cta")) return;
+    var sticky = createElement(
+      `
+      <div class="hst-sticky-cta" role="region" aria-label="내 목의 베개 빠른 이동">
+        <button type="button" class="primary" data-hst-purchase-jump>옵션 확인</button>
+        <button type="button" class="secondary" data-hst-review-jump>후기 보기</button>
+      </div>
+      `,
+    );
     document.body.appendChild(sticky);
   }
 
-  function pushRenderedEvent() {
-    window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({
-      event: "hellenstein_pillow_abtest_rendered",
-      product_no: TARGET_PRODUCT_NO,
-      detail_mode: isDetailMode ? "true" : "false",
-      block_count: blocks.length,
-      asset_version: ASSET_VERSION
+  function findPurchaseTarget() {
+    return (
+      document.querySelector(".detail-right .infoArea") ||
+      document.querySelector(".detail-right #orderFixItem") ||
+      document.querySelector(".detail-right") ||
+      document.querySelector("#orderFixItem")
+    );
+  }
+
+  function scrollToElement(target) {
+    if (!target) return;
+    target.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  function bindActions(root) {
+    document.addEventListener("click", function (event) {
+      var reviewButton = event.target.closest("[data-hst-review-jump]");
+      if (reviewButton) {
+        event.preventDefault();
+        pushEvent("hellenstein_pillow_abtest_review_jump_click");
+        scrollToElement(
+          document.querySelector('[data-hst-block="social-proof"]') ||
+            document.querySelector("#prdReview"),
+        );
+        return;
+      }
+
+      var purchaseButton = event.target.closest("[data-hst-purchase-jump]");
+      if (purchaseButton) {
+        event.preventDefault();
+        pushEvent("hellenstein_pillow_abtest_sticky_cta_click");
+        scrollToElement(findPurchaseTarget());
+      }
     });
   }
 
-  function tryRender() {
-    var container = document.querySelector("#prdDetail .prdimages");
-    if (!container) {
+  function render() {
+    injectStyle();
+    document.documentElement.classList.add("hst-pillow-abtest-active");
+
+    var target = document.querySelector("#prdDetail .prdimages");
+    if (!target) {
+      window.__HST_PILLOW_ABTEST_RENDERED__ = false;
       return false;
     }
 
-    if (container.getAttribute("data-hst-abtest-rendered") === "true") {
-      return true;
-    }
+    target.innerHTML = buildPdpHtml();
+    target.classList.add("hst-prdimages-replaced");
 
-    installStyles();
-    mountTopProof();
-    renderDetailImages(container);
-    mountStickyCta();
-    pushRenderedEvent();
+    injectTopProof();
+    injectStickyCta();
+    bindActions(target);
+
+    pushEvent("hellenstein_pillow_abtest_rendered");
     return true;
   }
 
-  function boot() {
-    if (tryRender()) {
-      return;
-    }
-
+  function waitForRender() {
     var attempts = 0;
     var timer = window.setInterval(function () {
       attempts += 1;
-      if (tryRender() || attempts >= 80) {
+      if (render() || attempts > 80) {
         window.clearInterval(timer);
       }
     }, 100);
   }
 
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", boot);
+    document.addEventListener("DOMContentLoaded", waitForRender);
   } else {
-    boot();
+    waitForRender();
   }
 })();
 </script>
