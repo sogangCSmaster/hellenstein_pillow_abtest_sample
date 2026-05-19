@@ -138,386 +138,7 @@
     if (document.getElementById("hst-pillow-abtest-style")) return;
     var style = document.createElement("style");
     style.id = "hst-pillow-abtest-style";
-    style.textContent = `
-      .hst-pdp, .hst-pdp * { box-sizing: border-box; }
-      .hst-pdp {
-        width: 100%;
-        max-width: 1000px;
-        margin: 0 auto;
-        font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard", "Noto Sans KR", sans-serif;
-        color: #24211e;
-        background: #fffdf9;
-      }
-      .hst-block {
-        position: relative;
-        width: 100%;
-        margin: 0 auto;
-        background: #fffdf9;
-      }
-      .hst-image-block img {
-        display: block;
-        width: 100%;
-        height: auto;
-        margin: 0 auto;
-        border: 0;
-      }
-      .hst-html-block {
-        padding: 72px 56px;
-        border-top: 1px solid #ede3d7;
-      }
-      .hst-eyebrow {
-        display: inline-flex;
-        align-items: center;
-        height: 30px;
-        padding: 0 13px;
-        border-radius: 999px;
-        background: #3d4d43;
-        color: #fff;
-        font-size: 13px;
-        font-weight: 800;
-        letter-spacing: 0;
-      }
-      .hst-html-block h2 {
-        margin: 22px 0 16px;
-        font-size: 40px;
-        line-height: 1.18;
-        font-weight: 850;
-        letter-spacing: 0;
-        color: #1f2421;
-      }
-      .hst-html-block p {
-        margin: 0;
-        font-size: 18px;
-        line-height: 1.72;
-        color: #62675f;
-        letter-spacing: 0;
-      }
-      .hst-proof-stats,
-      .hst-faq-list,
-      .hst-review-grid,
-      .hst-persona-grid,
-      .hst-comparison-table,
-      .hst-risk-grid {
-        margin-top: 34px;
-      }
-      .hst-proof-stats {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 12px;
-      }
-      .hst-stat {
-        padding: 22px 20px;
-        border: 1px solid #e4dbcf;
-        border-radius: 8px;
-        background: #fff;
-      }
-      .hst-stat strong {
-        display: block;
-        font-size: 28px;
-        line-height: 1.1;
-        color: #3d4d43;
-      }
-      .hst-stat span {
-        display: block;
-        margin-top: 8px;
-        font-size: 14px;
-        line-height: 1.45;
-        color: #6f706b;
-      }
-      .hst-review-grid {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 14px;
-      }
-      .hst-review-card {
-        min-height: 230px;
-        padding: 22px 20px;
-        border: 1px solid #e5ddd2;
-        border-radius: 8px;
-        background: #fff;
-      }
-      .hst-stars {
-        color: #a17b3d;
-        font-size: 16px;
-        font-weight: 850;
-      }
-      .hst-review-card blockquote {
-        margin: 14px 0 16px;
-        font-size: 15px;
-        line-height: 1.62;
-        color: #32342f;
-      }
-      .hst-review-card footer {
-        font-size: 13px;
-        color: #7b7a73;
-      }
-      .hst-action-row {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        align-items: center;
-        margin-top: 30px;
-      }
-      .hst-button {
-        appearance: none;
-        border: 1px solid #3d4d43;
-        border-radius: 4px;
-        background: #3d4d43;
-        color: #fff;
-        min-height: 46px;
-        padding: 0 18px;
-        font-size: 15px;
-        font-weight: 800;
-        cursor: pointer;
-      }
-      .hst-button.secondary {
-        background: #fff;
-        color: #3d4d43;
-      }
-      .hst-comparison-wrap {
-        overflow-x: auto;
-        border: 1px solid #e2d9ce;
-        border-radius: 8px;
-        background: #fff;
-      }
-      .hst-comparison-table {
-        width: 100%;
-        min-width: 720px;
-        border-collapse: collapse;
-        margin: 0;
-        font-size: 15px;
-      }
-      .hst-comparison-table th,
-      .hst-comparison-table td {
-        padding: 18px 16px;
-        border-bottom: 1px solid #ebe3d9;
-        text-align: left;
-        vertical-align: top;
-        line-height: 1.55;
-      }
-      .hst-comparison-table th {
-        background: #f7f2ea;
-        color: #3d4d43;
-        font-weight: 850;
-      }
-      .hst-comparison-table tr:last-child td {
-        border-bottom: 0;
-      }
-      .hst-comparison-table td:first-child {
-        width: 18%;
-        font-weight: 850;
-        color: #24211e;
-      }
-      .hst-comparison-table td:nth-child(2) {
-        background: #fffaf3;
-        color: #20231f;
-        font-weight: 720;
-      }
-      .hst-risk-grid {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 14px;
-      }
-      .hst-risk-card,
-      .hst-faq-item {
-        border: 1px solid #e3dacd;
-        border-radius: 8px;
-        background: #fff;
-      }
-      .hst-risk-card {
-        padding: 22px 20px;
-      }
-      .hst-risk-card strong {
-        display: block;
-        margin-bottom: 10px;
-        color: #3d4d43;
-        font-size: 18px;
-      }
-      .hst-faq-list {
-        display: grid;
-        gap: 10px;
-      }
-      .hst-faq-item {
-        padding: 22px 24px;
-      }
-      .hst-faq-item strong {
-        display: block;
-        margin-bottom: 10px;
-        font-size: 18px;
-        color: #24211e;
-      }
-      .hst-faq-item p {
-        font-size: 15px;
-        line-height: 1.65;
-      }
-      .hst-top-proof {
-        clear: both;
-        margin: 18px 0 24px;
-        padding: 18px 18px 16px;
-        border: 1px solid #e5ddd2;
-        border-radius: 8px;
-        background: #fffaf3;
-        font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard", "Noto Sans KR", sans-serif;
-      }
-      .hst-top-proof strong {
-        display: block;
-        font-size: 18px;
-        line-height: 1.35;
-        color: #24211e;
-      }
-      .hst-top-proof p {
-        margin: 7px 0 0;
-        font-size: 13px;
-        line-height: 1.55;
-        color: #68645d;
-      }
-      .hst-top-proof button {
-        margin-top: 12px;
-        height: 36px;
-        padding: 0 13px;
-        border: 1px solid #3d4d43;
-        border-radius: 4px;
-        background: #3d4d43;
-        color: #fff;
-        font-size: 13px;
-        font-weight: 800;
-        cursor: pointer;
-      }
-      .hst-sticky-cta {
-        position: fixed;
-        z-index: 2147483000;
-        right: 24px;
-        bottom: 24px;
-        display: flex;
-        gap: 8px;
-        align-items: center;
-        padding: 10px;
-        border: 1px solid rgba(61, 77, 67, .18);
-        border-radius: 8px;
-        background: rgba(255, 253, 249, .96);
-        box-shadow: 0 12px 32px rgba(0, 0, 0, .16);
-        backdrop-filter: blur(10px);
-      }
-      .hst-sticky-cta button {
-        height: 42px;
-        border-radius: 4px;
-        border: 1px solid #3d4d43;
-        padding: 0 14px;
-        font-size: 14px;
-        font-weight: 850;
-        cursor: pointer;
-      }
-      .hst-sticky-cta .primary {
-        background: #3d4d43;
-        color: #fff;
-      }
-      .hst-sticky-cta .secondary {
-        background: #fff;
-        color: #3d4d43;
-      }
-      .hst-detail-highlight {
-        outline: 3px solid rgba(239, 68, 68, .9);
-        outline-offset: -3px;
-      }
-      .hst-detail-highlight::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        pointer-events: none;
-        background: rgba(255, 214, 102, .18);
-        z-index: 4;
-      }
-      .hst-detail-badge {
-        position: absolute;
-        z-index: 5;
-        top: 18px;
-        left: 18px;
-        max-width: min(430px, calc(100% - 36px));
-        padding: 14px 15px 13px;
-        border: 2px solid #ef4444;
-        border-radius: 8px;
-        background: rgba(255, 255, 255, .94);
-        color: #1f2421;
-        box-shadow: 0 12px 30px rgba(31, 36, 33, .18);
-        text-align: left;
-      }
-      .hst-detail-badge strong {
-        display: block;
-        font-size: 14px;
-        line-height: 1.35;
-        color: #b42318;
-      }
-      .hst-detail-badge span {
-        display: block;
-        margin-top: 4px;
-        font-size: 13px;
-        line-height: 1.45;
-        color: #544c43;
-      }
-      @media (max-width: 767px) {
-        html.hst-pillow-abtest-active,
-        html.hst-pillow-abtest-active body {
-          width: 100% !important;
-          max-width: 100% !important;
-          margin-left: 0 !important;
-          margin-right: 0 !important;
-          overflow-x: hidden !important;
-        }
-        html.hst-pillow-abtest-active #wrap,
-        html.hst-pillow-abtest-active #container,
-        html.hst-pillow-abtest-active #contentsWrap,
-        html.hst-pillow-abtest-active #contents-detail,
-        html.hst-pillow-abtest-active .detailArea,
-        html.hst-pillow-abtest-active .detail-left,
-        html.hst-pillow-abtest-active .detail-right,
-        html.hst-pillow-abtest-active .productDetail,
-        html.hst-pillow-abtest-active .prdimages,
-        html.hst-pillow-abtest-active .hst-pdp {
-          width: 100% !important;
-          max-width: 100% !important;
-          min-width: 0 !important;
-          margin-left: 0 !important;
-          margin-right: 0 !important;
-          float: none !important;
-        }
-        .hst-html-block {
-          padding: 48px 20px;
-        }
-        .hst-html-block h2 {
-          font-size: 29px;
-          line-height: 1.22;
-        }
-        .hst-html-block p {
-          font-size: 15px;
-          line-height: 1.72;
-        }
-        .hst-proof-stats,
-        .hst-review-grid,
-        .hst-risk-grid {
-          grid-template-columns: 1fr;
-        }
-        .hst-sticky-cta {
-          left: 12px;
-          right: 12px;
-          bottom: 78px;
-          justify-content: stretch;
-        }
-        .hst-sticky-cta button {
-          flex: 1 1 0;
-          padding: 0 10px;
-        }
-        .hst-detail-badge {
-          position: relative;
-          top: auto;
-          left: auto;
-          max-width: none;
-          margin: 0;
-          border-radius: 0;
-          border-left: 3px solid #ef4444;
-          border-right: 3px solid #ef4444;
-        }
-      }
-    `;
+    style.textContent = "\n      .hst-pdp, .hst-pdp * { box-sizing: border-box; }\n      .hst-pdp {\n        width: 100%;\n        max-width: 1000px;\n        margin: 0 auto;\n        font-family: -apple-system, BlinkMacSystemFont, \"Apple SD Gothic Neo\", \"Pretendard\", \"Noto Sans KR\", sans-serif;\n        color: #24211e;\n        background: #fffdf9;\n      }\n      .hst-block {\n        position: relative;\n        width: 100%;\n        margin: 0 auto;\n        background: #fffdf9;\n      }\n      .hst-image-block img {\n        display: block;\n        width: 100%;\n        height: auto;\n        margin: 0 auto;\n        border: 0;\n      }\n      .hst-html-block {\n        padding: 72px 56px;\n        border-top: 1px solid #ede3d7;\n      }\n      .hst-eyebrow {\n        display: inline-flex;\n        align-items: center;\n        height: 30px;\n        padding: 0 13px;\n        border-radius: 999px;\n        background: #3d4d43;\n        color: #fff;\n        font-size: 13px;\n        font-weight: 800;\n        letter-spacing: 0;\n      }\n      .hst-html-block h2 {\n        margin: 22px 0 16px;\n        font-size: 40px;\n        line-height: 1.18;\n        font-weight: 850;\n        letter-spacing: 0;\n        color: #1f2421;\n      }\n      .hst-html-block p {\n        margin: 0;\n        font-size: 18px;\n        line-height: 1.72;\n        color: #62675f;\n        letter-spacing: 0;\n      }\n      .hst-proof-stats,\n      .hst-faq-list,\n      .hst-review-grid,\n      .hst-persona-grid,\n      .hst-comparison-table,\n      .hst-risk-grid {\n        margin-top: 34px;\n      }\n      .hst-proof-stats {\n        display: grid;\n        grid-template-columns: repeat(3, minmax(0, 1fr));\n        gap: 12px;\n      }\n      .hst-stat {\n        padding: 22px 20px;\n        border: 1px solid #e4dbcf;\n        border-radius: 8px;\n        background: #fff;\n      }\n      .hst-stat strong {\n        display: block;\n        font-size: 28px;\n        line-height: 1.1;\n        color: #3d4d43;\n      }\n      .hst-stat span {\n        display: block;\n        margin-top: 8px;\n        font-size: 14px;\n        line-height: 1.45;\n        color: #6f706b;\n      }\n      .hst-review-grid {\n        display: grid;\n        grid-template-columns: repeat(3, minmax(0, 1fr));\n        gap: 14px;\n      }\n      .hst-review-card {\n        min-height: 230px;\n        padding: 22px 20px;\n        border: 1px solid #e5ddd2;\n        border-radius: 8px;\n        background: #fff;\n      }\n      .hst-stars {\n        color: #a17b3d;\n        font-size: 16px;\n        font-weight: 850;\n      }\n      .hst-review-card blockquote {\n        margin: 14px 0 16px;\n        font-size: 15px;\n        line-height: 1.62;\n        color: #32342f;\n      }\n      .hst-review-card footer {\n        font-size: 13px;\n        color: #7b7a73;\n      }\n      .hst-action-row {\n        display: flex;\n        flex-wrap: wrap;\n        gap: 10px;\n        align-items: center;\n        margin-top: 30px;\n      }\n      .hst-button {\n        appearance: none;\n        border: 1px solid #3d4d43;\n        border-radius: 4px;\n        background: #3d4d43;\n        color: #fff;\n        min-height: 46px;\n        padding: 0 18px;\n        font-size: 15px;\n        font-weight: 800;\n        cursor: pointer;\n      }\n      .hst-button.secondary {\n        background: #fff;\n        color: #3d4d43;\n      }\n      .hst-comparison-wrap {\n        overflow-x: auto;\n        border: 1px solid #e2d9ce;\n        border-radius: 8px;\n        background: #fff;\n      }\n      .hst-comparison-table {\n        width: 100%;\n        min-width: 720px;\n        border-collapse: collapse;\n        margin: 0;\n        font-size: 15px;\n      }\n      .hst-comparison-table th,\n      .hst-comparison-table td {\n        padding: 18px 16px;\n        border-bottom: 1px solid #ebe3d9;\n        text-align: left;\n        vertical-align: top;\n        line-height: 1.55;\n      }\n      .hst-comparison-table th {\n        background: #f7f2ea;\n        color: #3d4d43;\n        font-weight: 850;\n      }\n      .hst-comparison-table tr:last-child td {\n        border-bottom: 0;\n      }\n      .hst-comparison-table td:first-child {\n        width: 18%;\n        font-weight: 850;\n        color: #24211e;\n      }\n      .hst-comparison-table td:nth-child(2) {\n        background: #fffaf3;\n        color: #20231f;\n        font-weight: 720;\n      }\n      .hst-risk-grid {\n        display: grid;\n        grid-template-columns: repeat(3, minmax(0, 1fr));\n        gap: 14px;\n      }\n      .hst-risk-card,\n      .hst-faq-item {\n        border: 1px solid #e3dacd;\n        border-radius: 8px;\n        background: #fff;\n      }\n      .hst-risk-card {\n        padding: 22px 20px;\n      }\n      .hst-risk-card strong {\n        display: block;\n        margin-bottom: 10px;\n        color: #3d4d43;\n        font-size: 18px;\n      }\n      .hst-faq-list {\n        display: grid;\n        gap: 10px;\n      }\n      .hst-faq-item {\n        padding: 22px 24px;\n      }\n      .hst-faq-item strong {\n        display: block;\n        margin-bottom: 10px;\n        font-size: 18px;\n        color: #24211e;\n      }\n      .hst-faq-item p {\n        font-size: 15px;\n        line-height: 1.65;\n      }\n      .hst-top-proof {\n        clear: both;\n        margin: 18px 0 24px;\n        padding: 18px 18px 16px;\n        border: 1px solid #e5ddd2;\n        border-radius: 8px;\n        background: #fffaf3;\n        font-family: -apple-system, BlinkMacSystemFont, \"Apple SD Gothic Neo\", \"Pretendard\", \"Noto Sans KR\", sans-serif;\n      }\n      .hst-top-proof strong {\n        display: block;\n        font-size: 18px;\n        line-height: 1.35;\n        color: #24211e;\n      }\n      .hst-top-proof p {\n        margin: 7px 0 0;\n        font-size: 13px;\n        line-height: 1.55;\n        color: #68645d;\n      }\n      .hst-top-proof button {\n        margin-top: 12px;\n        height: 36px;\n        padding: 0 13px;\n        border: 1px solid #3d4d43;\n        border-radius: 4px;\n        background: #3d4d43;\n        color: #fff;\n        font-size: 13px;\n        font-weight: 800;\n        cursor: pointer;\n      }\n      .hst-sticky-cta {\n        position: fixed;\n        z-index: 2147483000;\n        right: 24px;\n        bottom: 24px;\n        display: flex;\n        gap: 8px;\n        align-items: center;\n        padding: 10px;\n        border: 1px solid rgba(61, 77, 67, .18);\n        border-radius: 8px;\n        background: rgba(255, 253, 249, .96);\n        box-shadow: 0 12px 32px rgba(0, 0, 0, .16);\n        backdrop-filter: blur(10px);\n      }\n      .hst-sticky-cta button {\n        height: 42px;\n        border-radius: 4px;\n        border: 1px solid #3d4d43;\n        padding: 0 14px;\n        font-size: 14px;\n        font-weight: 850;\n        cursor: pointer;\n      }\n      .hst-sticky-cta .primary {\n        background: #3d4d43;\n        color: #fff;\n      }\n      .hst-sticky-cta .secondary {\n        background: #fff;\n        color: #3d4d43;\n      }\n      .hst-detail-highlight {\n        outline: 3px solid rgba(239, 68, 68, .9);\n        outline-offset: -3px;\n      }\n      .hst-detail-highlight::before {\n        content: \"\";\n        position: absolute;\n        inset: 0;\n        pointer-events: none;\n        background: rgba(255, 214, 102, .18);\n        z-index: 4;\n      }\n      .hst-detail-badge {\n        position: absolute;\n        z-index: 5;\n        top: 18px;\n        left: 18px;\n        max-width: min(430px, calc(100% - 36px));\n        padding: 14px 15px 13px;\n        border: 2px solid #ef4444;\n        border-radius: 8px;\n        background: rgba(255, 255, 255, .94);\n        color: #1f2421;\n        box-shadow: 0 12px 30px rgba(31, 36, 33, .18);\n        text-align: left;\n      }\n      .hst-detail-badge strong {\n        display: block;\n        font-size: 14px;\n        line-height: 1.35;\n        color: #b42318;\n      }\n      .hst-detail-badge span {\n        display: block;\n        margin-top: 4px;\n        font-size: 13px;\n        line-height: 1.45;\n        color: #544c43;\n      }\n      @media (max-width: 767px) {\n        html.hst-pillow-abtest-active,\n        html.hst-pillow-abtest-active body {\n          width: 100% !important;\n          max-width: 100% !important;\n          margin-left: 0 !important;\n          margin-right: 0 !important;\n          overflow-x: hidden !important;\n        }\n        html.hst-pillow-abtest-active #wrap,\n        html.hst-pillow-abtest-active #container,\n        html.hst-pillow-abtest-active #contentsWrap,\n        html.hst-pillow-abtest-active #contents-detail,\n        html.hst-pillow-abtest-active .detailArea,\n        html.hst-pillow-abtest-active .detail-left,\n        html.hst-pillow-abtest-active .detail-right,\n        html.hst-pillow-abtest-active .productDetail,\n        html.hst-pillow-abtest-active .prdimages,\n        html.hst-pillow-abtest-active .hst-pdp {\n          width: 100% !important;\n          max-width: 100% !important;\n          min-width: 0 !important;\n          margin-left: 0 !important;\n          margin-right: 0 !important;\n          float: none !important;\n        }\n        .hst-html-block {\n          padding: 48px 20px;\n        }\n        .hst-html-block h2 {\n          font-size: 29px;\n          line-height: 1.22;\n        }\n        .hst-html-block p {\n          font-size: 15px;\n          line-height: 1.72;\n        }\n        .hst-proof-stats,\n        .hst-review-grid,\n        .hst-risk-grid {\n          grid-template-columns: 1fr;\n        }\n        .hst-sticky-cta {\n          left: 12px;\n          right: 12px;\n          bottom: 78px;\n          justify-content: stretch;\n        }\n        .hst-sticky-cta button {\n          flex: 1 1 0;\n          padding: 0 10px;\n        }\n        .hst-detail-badge {\n          position: relative;\n          top: auto;\n          left: auto;\n          max-width: none;\n          margin: 0;\n          border-radius: 0;\n          border-left: 3px solid #ef4444;\n          border-right: 3px solid #ef4444;\n        }\n      }\n    ";
     document.head.appendChild(style);
   }
 
@@ -631,20 +252,7 @@
     var reviews = collectReviews();
     return htmlBlock(
       "social-proof",
-      `
-        <span class="hst-eyebrow">실제 사용 후기</span>
-        <h2>구매 전, 실제 사용 후기로 먼저 확인하세요</h2>
-        <p>높이 조절, 목 지지, 관리 편의성처럼 실제 구매자가 남긴 만족 포인트를 먼저 확인할 수 있습니다.</p>
-        <div class="hst-proof-stats">
-          <div class="hst-stat"><strong>5.0</strong><span>상품 상세 기준 평균 별점</span></div>
-          <div class="hst-stat"><strong>144개</strong><span>현재 상품 후기 수</span></div>
-          <div class="hst-stat"><strong>29페이지</strong><span>더 확인할 수 있는 후기</span></div>
-        </div>
-        <div class="hst-review-grid">${reviewCards(reviews)}</div>
-        <div class="hst-action-row">
-          <button class="hst-button" type="button" data-hst-review-jump>전체 후기 보기</button>
-        </div>
-      `,
+      "\n        <span class=\"hst-eyebrow\">실제 사용 후기</span>\n        <h2>구매 전, 실제 사용 후기로 먼저 확인하세요</h2>\n        <p>높이 조절, 목 지지, 관리 편의성처럼 실제 구매자가 남긴 만족 포인트를 먼저 확인할 수 있습니다.</p>\n        <div class=\"hst-proof-stats\">\n          <div class=\"hst-stat\"><strong>5.0</strong><span>상품 상세 기준 평균 별점</span></div>\n          <div class=\"hst-stat\"><strong>144개</strong><span>현재 상품 후기 수</span></div>\n          <div class=\"hst-stat\"><strong>29페이지</strong><span>더 확인할 수 있는 후기</span></div>\n        </div>\n        <div class=\"hst-review-grid\">" + (reviewCards(reviews)) + "</div>\n        <div class=\"hst-action-row\">\n          <button class=\"hst-button\" type=\"button\" data-hst-review-jump>전체 후기 보기</button>\n        </div>\n      ",
       detailMeta.social
     );
   }
@@ -652,49 +260,7 @@
   function comparisonBlock() {
     return htmlBlock(
       "comparison",
-      `
-        <span class="hst-eyebrow">비교 기준</span>
-        <h2>내 몸에 맞는 기준을 한눈에 비교하세요</h2>
-        <p>가격만 비교하기보다 높이 조절, 지지 구조, 인증, 관리 기준을 함께 보면 내게 맞는 베개인지 더 쉽게 판단할 수 있습니다.</p>
-        <div class="hst-comparison-wrap">
-          <table class="hst-comparison-table" aria-label="내 목의 베개 비교표">
-            <thead>
-              <tr>
-                <th>기준</th>
-                <th>헬렌스타인 내 목의 베개</th>
-                <th>일반 베개</th>
-                <th>일반 경추 베개</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>높이 조절</td>
-                <td>4단계 높이 조절로 체형과 자세에 맞춤</td>
-                <td>고정 높이인 경우가 많아 적응이 필요</td>
-                <td>일부 조절형이지만 구조 설명이 부족한 경우가 많음</td>
-              </tr>
-              <tr>
-                <td>지지 구조</td>
-                <td>목, 머리, 어깨, 옆잠을 나눠 받치는 4분할 구조</td>
-                <td>면 전체로 받치는 단순 구조</td>
-                <td>목 지지 중심으로 장시간 사용감 차이가 생길 수 있음</td>
-              </tr>
-              <tr>
-                <td>신뢰 근거</td>
-                <td>5년 반복 테스트, FITI, 소재 안전성, 내구성 검증</td>
-                <td>제품별 근거 확인이 어려운 경우가 있음</td>
-                <td>인증과 소재 정보가 분산되어 비교가 번거로움</td>
-              </tr>
-              <tr>
-                <td>관리</td>
-                <td>사용 가이드와 케어 가이드를 함께 제공</td>
-                <td>세탁과 관리 기준을 따로 찾아야 함</td>
-                <td>구조가 복잡할수록 관리 기준 확인이 필요</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      `,
+      "\n        <span class=\"hst-eyebrow\">비교 기준</span>\n        <h2>내 몸에 맞는 기준을 한눈에 비교하세요</h2>\n        <p>가격만 비교하기보다 높이 조절, 지지 구조, 인증, 관리 기준을 함께 보면 내게 맞는 베개인지 더 쉽게 판단할 수 있습니다.</p>\n        <div class=\"hst-comparison-wrap\">\n          <table class=\"hst-comparison-table\" aria-label=\"내 목의 베개 비교표\">\n            <thead>\n              <tr>\n                <th>기준</th>\n                <th>헬렌스타인 내 목의 베개</th>\n                <th>일반 베개</th>\n                <th>일반 경추 베개</th>\n              </tr>\n            </thead>\n            <tbody>\n              <tr>\n                <td>높이 조절</td>\n                <td>4단계 높이 조절로 체형과 자세에 맞춤</td>\n                <td>고정 높이인 경우가 많아 적응이 필요</td>\n                <td>일부 조절형이지만 구조 설명이 부족한 경우가 많음</td>\n              </tr>\n              <tr>\n                <td>지지 구조</td>\n                <td>목, 머리, 어깨, 옆잠을 나눠 받치는 4분할 구조</td>\n                <td>면 전체로 받치는 단순 구조</td>\n                <td>목 지지 중심으로 장시간 사용감 차이가 생길 수 있음</td>\n              </tr>\n              <tr>\n                <td>신뢰 근거</td>\n                <td>5년 반복 테스트, FITI, 소재 안전성, 내구성 검증</td>\n                <td>제품별 근거 확인이 어려운 경우가 있음</td>\n                <td>인증과 소재 정보가 분산되어 비교가 번거로움</td>\n              </tr>\n              <tr>\n                <td>관리</td>\n                <td>사용 가이드와 케어 가이드를 함께 제공</td>\n                <td>세탁과 관리 기준을 따로 찾아야 함</td>\n                <td>구조가 복잡할수록 관리 기준 확인이 필요</td>\n              </tr>\n            </tbody>\n          </table>\n        </div>\n      ",
       detailMeta.comparison
     );
   }
@@ -702,16 +268,7 @@
   function riskBlock() {
     return htmlBlock(
       "risk-reversal",
-      `
-        <span class="hst-eyebrow">처음 2주 안내</span>
-        <h2>처음부터 맞추는 제품이 아니라, 내 몸에 맞게 조절하는 제품입니다</h2>
-        <p>경추 베개는 체형과 수면 자세에 따라 적응감이 달라질 수 있습니다. 그래서 구매 전에는 높이 조절 방법과 적응 기간을 먼저 안내하고, 교환·반품 기준은 공식 정책으로 확인하게 둡니다.</p>
-        <div class="hst-risk-grid">
-          <div class="hst-risk-card"><strong>1단계</strong><p>첫날에는 기본 높이로 사용감을 확인합니다.</p></div>
-          <div class="hst-risk-card"><strong>2단계</strong><p>목과 어깨 부담이 느껴지면 패드로 높이를 조절합니다.</p></div>
-          <div class="hst-risk-card"><strong>3단계</strong><p>적응 기간과 공식 교환·반품 기준을 함께 확인합니다.</p></div>
-        </div>
-      `,
+      "\n        <span class=\"hst-eyebrow\">처음 2주 안내</span>\n        <h2>처음부터 맞추는 제품이 아니라, 내 몸에 맞게 조절하는 제품입니다</h2>\n        <p>경추 베개는 체형과 수면 자세에 따라 적응감이 달라질 수 있습니다. 그래서 구매 전에는 높이 조절 방법과 적응 기간을 먼저 안내하고, 교환·반품 기준은 공식 정책으로 확인하게 둡니다.</p>\n        <div class=\"hst-risk-grid\">\n          <div class=\"hst-risk-card\"><strong>1단계</strong><p>첫날에는 기본 높이로 사용감을 확인합니다.</p></div>\n          <div class=\"hst-risk-card\"><strong>2단계</strong><p>목과 어깨 부담이 느껴지면 패드로 높이를 조절합니다.</p></div>\n          <div class=\"hst-risk-card\"><strong>3단계</strong><p>적응 기간과 공식 교환·반품 기준을 함께 확인합니다.</p></div>\n        </div>\n      ",
       detailMeta.risk
     );
   }
@@ -719,17 +276,7 @@
   function faqBlock() {
     return htmlBlock(
       "faq",
-      `
-        <span class="hst-eyebrow">FAQ</span>
-        <h2>마지막 망설임을 먼저 답합니다</h2>
-        <div class="hst-faq-list">
-          <div class="hst-faq-item"><strong>왜 일반 베개보다 가격대가 높은가요?</strong><p>4단계 높이 조절, 4분할 지지 구조, 5년 반복 테스트, FITI와 소재 안전성 검증을 한 제품 안에 묶은 고관여 침구이기 때문입니다.</p></div>
-          <div class="hst-faq-item"><strong>처음부터 바로 편해야 하나요?</strong><p>체형과 수면 자세에 따라 적응감이 다를 수 있습니다. 처음에는 기본 높이로 시작하고, 필요하면 패드로 높이를 조절하는 방식이 좋습니다.</p></div>
-          <div class="hst-faq-item"><strong>옆으로 자는 사람도 쓸 수 있나요?</strong><p>목과 머리를 따로 받치는 구조라 옆으로 누웠을 때의 높이 차이를 줄이도록 설계된 제품입니다.</p></div>
-          <div class="hst-faq-item"><strong>세탁과 관리는 어떻게 하나요?</strong><p>상세 하단의 사용 가이드, 케어 가이드, 세탁 안내를 기준으로 관리하면 됩니다. 제품 구조와 커버 관리를 함께 확인하세요.</p></div>
-          <div class="hst-faq-item"><strong>부모님 선물로도 괜찮나요?</strong><p>베개 높이 취향을 정확히 몰라도 조절 가능한 구조라 선물 맥락에서도 설명하기 쉽습니다. 단, 개인 체형과 수면 습관에 맞춘 조절은 필요합니다.</p></div>
-        </div>
-      `,
+      "\n        <span class=\"hst-eyebrow\">FAQ</span>\n        <h2>마지막 망설임을 먼저 답합니다</h2>\n        <div class=\"hst-faq-list\">\n          <div class=\"hst-faq-item\"><strong>왜 일반 베개보다 가격대가 높은가요?</strong><p>4단계 높이 조절, 4분할 지지 구조, 5년 반복 테스트, FITI와 소재 안전성 검증을 한 제품 안에 묶은 고관여 침구이기 때문입니다.</p></div>\n          <div class=\"hst-faq-item\"><strong>처음부터 바로 편해야 하나요?</strong><p>체형과 수면 자세에 따라 적응감이 다를 수 있습니다. 처음에는 기본 높이로 시작하고, 필요하면 패드로 높이를 조절하는 방식이 좋습니다.</p></div>\n          <div class=\"hst-faq-item\"><strong>옆으로 자는 사람도 쓸 수 있나요?</strong><p>목과 머리를 따로 받치는 구조라 옆으로 누웠을 때의 높이 차이를 줄이도록 설계된 제품입니다.</p></div>\n          <div class=\"hst-faq-item\"><strong>세탁과 관리는 어떻게 하나요?</strong><p>상세 하단의 사용 가이드, 케어 가이드, 세탁 안내를 기준으로 관리하면 됩니다. 제품 구조와 커버 관리를 함께 확인하세요.</p></div>\n          <div class=\"hst-faq-item\"><strong>부모님 선물로도 괜찮나요?</strong><p>베개 높이 취향을 정확히 몰라도 조절 가능한 구조라 선물 맥락에서도 설명하기 쉽습니다. 단, 개인 체형과 수면 습관에 맞춘 조절은 필요합니다.</p></div>\n        </div>\n      ",
       detailMeta.faq
     );
   }
@@ -759,13 +306,7 @@
     var box = document.querySelector(".infoAreabox");
     if (!box || document.querySelector(".hst-top-proof")) return;
     var proof = createElement(
-      `
-      <div class="hst-top-proof">
-        <strong>★★★★★ 5.0 · 후기 144개</strong>
-        <p>4단계 높이 조절, 4분할 지지 구조, FITI·소재 안전성 검증까지 구매 전 한 번에 확인하세요.</p>
-        <button type="button" data-hst-review-jump>실제 후기 먼저 보기</button>
-      </div>
-      `
+      "\n      <div class=\"hst-top-proof\">\n        <strong>★★★★★ 5.0 · 후기 144개</strong>\n        <p>4단계 높이 조절, 4분할 지지 구조, FITI·소재 안전성 검증까지 구매 전 한 번에 확인하세요.</p>\n        <button type=\"button\" data-hst-review-jump>실제 후기 먼저 보기</button>\n      </div>\n      "
     );
     box.parentNode.insertBefore(proof, box.nextSibling);
   }
@@ -773,12 +314,7 @@
   function injectStickyCta() {
     if (document.querySelector(".hst-sticky-cta")) return;
     var sticky = createElement(
-      `
-      <div class="hst-sticky-cta" role="region" aria-label="내 목의 베개 빠른 이동">
-        <button type="button" class="primary" data-hst-purchase-jump>옵션 확인</button>
-        <button type="button" class="secondary" data-hst-review-jump>후기 보기</button>
-      </div>
-      `
+      "\n      <div class=\"hst-sticky-cta\" role=\"region\" aria-label=\"내 목의 베개 빠른 이동\">\n        <button type=\"button\" class=\"primary\" data-hst-purchase-jump>옵션 확인</button>\n        <button type=\"button\" class=\"secondary\" data-hst-review-jump>후기 보기</button>\n      </div>\n      "
     );
     document.body.appendChild(sticky);
   }
